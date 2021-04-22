@@ -9,6 +9,7 @@
   "author": "Sue B",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "antd": "^4.15.2",
     "next": "^9.5.5",
     "prop-types": "^15.7.2",
