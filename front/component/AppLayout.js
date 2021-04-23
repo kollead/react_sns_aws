@@ -1,7 +1,7 @@
 import React from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Link from 'next/link'
-import {Menu} from 'antd'
+import {Input, Menu} from 'antd'
 
 const AppLayout = ({children}) => {
  return (
@@ -14,6 +14,9 @@ const AppLayout = ({children}) => {
                 <Link href="/profile"><a>profile</a></Link>
              </Menu.Item>
              <Menu.Item>
+                 <Input.Search/>
+             </Menu.Item>
+             <Menu.Item>
                 <Link href="/signup"><a>signup</a></Link>
              </Menu.Item>
          </Menu>
@@ -22,8 +25,8 @@ const AppLayout = ({children}) => {
  );
 };
 
-AppLayout.Proptypes = {
-    children: Proptypes.node.isRequired
+AppLayout.propTypes = {
+    children: PropTypes.node.isRequired
 }
 
 export default AppLayout;
