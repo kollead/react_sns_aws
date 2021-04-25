@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link'
 import {Input, Menu, Row, Col} from 'antd'
+import LoginForm from './LoginForm'
+import UserProfile from './UserProfile'
 
 const AppLayout = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
