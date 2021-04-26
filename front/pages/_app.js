@@ -6,13 +6,12 @@ import Head from 'next/head'
 const App = ({Component}) => {
     return (
         <>
-            <Head>
-                <meta charSet="utf-8"/>
-                <title>NodeBird</title>
-                <div>공통 메뉴</div>
-                <Component />
-            </Head>
-        </>
+        <Head>            
+            <meta charSet="utf-8"/>
+            <title>NodeBird</title>
+        </Head>        
+        <Component />   
+        </>     
     )
 }
 
