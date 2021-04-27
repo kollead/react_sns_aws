@@ -9,7 +9,9 @@ const Profile = () => {
                 <title>Profile | NodeBird</title>
             </Head>
             <AppLayout>
-                <div>profile</div>
+                <NickNameEditForm/>
+                <FollowList header="Following List" data={followingList}/>
+                <FollowerList header="Follower List" data={followerList}/>
             </AppLayout>
         </>
     )

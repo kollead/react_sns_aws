@@ -2,12 +2,17 @@ import React, {useState, useCallback} from 'react'
 import {Form, Input, Button} from 'antd'
 import Link from 'next/link'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const ButtonWrapper=styled.div`
     margin-top: 10px;
 `;
 
-const LoginForm = () => {
+const FormWrapper = styled(Form)`
+    padding: 10px;
+`;
+
+const LoginForm = ({setIsLoggedIn}) => {
 
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
@@ -25,10 +30,11 @@ const LoginForm = () => {
 
     const onsubmitForm = useCallback(()=>{
         console.log(id, password)
+        setIsLoggedIn(true)
     },[id, password])
 
     return (
-        <Form onFinish={onsubmitForm}>
+        <FormWrapper onFinish={onsubmitForm}>
             <div>
                 <label htmlFor="user-id" >ID</label>
                 <br/>
@@ -54,7 +60,12 @@ const LoginForm = () => {
                 <Link href="/signup"><a>Signup</a></Link>
                 </ButtonWrapper>
             </div>
-        </Form>        
+        </FormWrapper>        
     );
 }
+
+LoginForm.propTypes = {
+    setIsLoggedIn: PropTypes.node.isRequired
+}
+
 export default LoginForm;
