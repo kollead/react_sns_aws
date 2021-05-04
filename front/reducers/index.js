@@ -1,7 +1,22 @@
 const initialState = {
-    name: '1'
-    age: 22
+    user: {
+        isLoggedIn: false,
+        user: null,
+        signUpData:{},
+        loginData: {}
+    },
+    post: {
+        mainPosts:[]
+    }
 }
+
+const login=(data)=>{
+    return {
+        type: 'LOG_IN',
+        data
+    }
+}
+
 
 const rootReducer = (state=initialState, action)=>{
 
