@@ -4,6 +4,8 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import {useDispatch} from 'react-redux'
 import useInput from '../hooks/useInput'
+import loginAction from '../reducers/index'
+import Password from 'antd/lib/input/Password'
 
 const ButtonWrapper=styled.div`
     margin-top: 10px;
@@ -24,7 +26,7 @@ const LoginForm = () => {
 
     const onsubmitForm = useCallback(()=>{
         console.log(id, password)
-        dispatch(login(true));
+        dispatch(loginAction({id, Password}));
         //setIsLoggedIn(true)
     },[id, password])
 
