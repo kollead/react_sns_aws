@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import {useDispatch} from 'react-redux'
 import useInput from '../hooks/useInput'
-import loginAction from '../reducers/index'
+import {loginAction} from '../reducers/index'
 import Password from 'antd/lib/input/Password'
 
 const ButtonWrapper=styled.div`
