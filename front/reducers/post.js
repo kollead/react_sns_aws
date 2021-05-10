@@ -15,14 +15,20 @@ export const initialState = {
             },
             content: "first comments"
         }],
-        imagePath: [],
+        imagePaths: [],
         postAdded: false
     }]
 }
 
+const ADD_POST = "ADD_POST"
+export const addPost = (data) => {
+    return {type: ADD_POST, data}
+}
+
 const reducer = (state=initialState, action) => {
     switch (action.type) {
-        
+        case ADD_POST : 
+            return {...state, content: action.data};
         default:
             return state;
     }
