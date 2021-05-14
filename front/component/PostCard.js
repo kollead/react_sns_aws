@@ -1,17 +1,16 @@
 import React, {useState, useCallback} from 'react'
 import PropTypes from 'prop-types'
 import {Card, Popover, Button, Avatar, List, Comment} from 'antd'
-import {EllipsisOutlined, HeartOutlined, MessageOutlined,
-     RetweetOutLined, HeartFilled} from "@ant-design/icons"
+import {EllipsisOutlined, HeartOutlined, MessageOutlined, HeartFilled, RetweetOutlined} from "@ant-design/icons"
 import { useSelector } from 'react-redux'
-import {PostImages} from './PostImages'
-import {CommentForm} from './CommentForm'
+import PostImages from './PostImages'
+import CommentForm from './CommentForm'
 
 function PostCard({post}) {
 
     const [liked, setLiked] = useState(false)
     const [commentFormOpened, setCommentFormOpened] = useState(false)
-    const id = useSelector(state=>state.User.user?.id)
+    const id = useSelector(state=>state.user.user?.id)
     const onToggleLike = useCallback(
         () => {
             setLiked((prev)=>!prev);
@@ -30,7 +29,7 @@ function PostCard({post}) {
                 cover={post.Images[0]
                 && <PostImages images={post.Images}/>}
                 actions = {[
-                    <RetweetOutLined key="retweet"/>,
+                    <RetweetOutlined key="retweet"/>,
                     
                     liked
                         ? <HeartFilled  key="heart" onClick={onToggleLike}/>
@@ -70,7 +69,7 @@ function PostCard({post}) {
                             <li>
                                 <Comment
                                     author={item.User.nickname}
-                                    avatar={<Avatar>{item.user.nickname[0]}</Avatar>}
+                                    avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
                                     content={item.content}
                                 />
                             </li>
@@ -86,7 +85,7 @@ function PostCard({post}) {
 }
 
 PostCard.propTypes={
-    post: PropTypes.shape.isRequired
+    post: PropTypes.object.isRequired
 }
 
 export default PostCard
