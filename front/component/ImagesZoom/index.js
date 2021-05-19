@@ -1,58 +1,43 @@
 import React,{useState} from 'react'
 import PropTypes from 'prop-types'
 import Slick from 'react-slick'
-import styled from 'styled-components'
-
-const Overlay = styled.div`
-    position: fixed;
-    z-index: 5000;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-`;
-const Header = styled.div`
-    height: 44px;
-    background: white;
-    position: relative;
-    padding: 0;
-    text-align: center;
-
-    & h1 {
-        margin: 0;
-        font-size: 17px;
-        color: #333;
-        line-height: 44px;
-    }
-
-    & button {
-
-    }
-`
-
+import {Overlay, Global, Header, CloseBtn, SlickWrapper, Indicator, ImgWrapper} from './styles'
 
 const ImagesZoom = ({images, onClose})=>{
     const [currentSlide, setCurrentSlide]=useState(0)
     return (
         <Overlay>
+            <Global/>
             <Header>
                 <h1>Detailed Images</h1>
-                <button onClick={onClose}>X</button>
+                <CloseBtn onClick={onClose}>X</CloseBtn>
             </Header>
-            <div>
-                <Slick
-                initialSlide={0}
-                afterChange={(slide)=>setCurrentSlide(slide)}
-                infinite
-                slidesToShow={1}
-                slidesToScroll={1}
-                />
-                    {images && images.map((v)=>(
-                        <div key={v.src}>
-                            <img src={v.src} alt={v.src}/>
+            <SlickWrapper>
+                <div>
+                    <Slick
+                        initialSlide={0}
+                        beforeChange={(slide, newSlide)=>setCurrentSlide(newSlide)}
+                        infinite
+                        arrows={false}
+                        slidesToShow={1}
+                        slidesToScroll={1}
+                    >
+                        {images && images.map((v)=>(
+                            <ImgWrapper key={v.src}>
+                                <img src={v.src} alt={v.src}/>
+                            </ImgWrapper>
+                        ))}
+                    </Slick>
+                    <Indicator>
+                        <div>
+                            {currentSlide+1}
+                            {' '}
+                            /
+                            {images.length}
                         </div>
-                    ))}
-            </div>
+                    </Indicator>
+                </div>
+            </SlickWrapper>
         </Overlay>
     );
 }
