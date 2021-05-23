@@ -28,14 +28,15 @@ export const initialState = {
     }]
 }
 
-const ADD_POST = "ADD_POST"
+const ADD_POST_REQUEST = "ADD_POST_REQUEST"
+
 export const addPost = (data) => {
-    return {type: ADD_POST, data}
+    return {type: ADD_POST_REQUEST, data}
 }
 
 const reducer = (state=initialState, action) => {
     switch (action.type) {
-        case ADD_POST : 
+        case ADD_POST_REQUEST : 
             return {...state, content: action.data};
         default:
             return state;
