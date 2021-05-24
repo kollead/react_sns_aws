@@ -11,11 +11,11 @@ function logoutAPI() {
 function* logIn(action) {
     
     try {
-        const result = yield call(loginAPI, action.data)
+        //const result = yield call(loginAPI, action.data)
         yield delay(1000)
         yield put({
             type: "LOG_IN_SUCCESS",
-            data: result.data
+            data: action.data
         })
     } catch (error) {
         yield put({

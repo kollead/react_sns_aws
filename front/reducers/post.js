@@ -29,6 +29,8 @@ export const initialState = {
 }
 
 const ADD_POST_REQUEST = "ADD_POST_REQUEST"
+const ADD_POST_SUCCESS = "ADD_POST_SUCCESS"
+const ADD_POST_FAILURE = "ADD_POST_FAILURE"
 
 export const addPost = (data) => {
     return {type: ADD_POST_REQUEST, data}

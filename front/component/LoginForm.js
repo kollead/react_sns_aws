@@ -2,9 +2,9 @@ import React, {useCallback} from 'react'
 import {Form, Input, Button} from 'antd'
 import Link from 'next/link'
 import styled from 'styled-components'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import useInput from '../hooks/useInput'
-import {loginAction} from '../reducers/user'
+import {loginRequestAction} from '../reducers/user'
 
 
 const ButtonWrapper=styled.div`
@@ -19,14 +19,15 @@ const LoginForm = () => {
 
     const dispatch = useDispatch();
     const [id, onChangeId] = useInput('')
-    const [password, onChangePassword]=useInput('') 
+    const [password, onChangePassword]=useInput('')
+    const {isLoggingIn} = useSelector((state)=>state.user) 
     
     //const style= useMemo(()=>({marginTop: 10}), []);
     //<ButtonWrapper style={style}>
 
     const onsubmitForm = useCallback(()=>{
         console.log(id, password)
-        dispatch(loginAction({id, password}));
+        dispatch(loginRequestAction({id, password}));
         //setIsLoggedIn(true)
     },[id, password])
 
@@ -53,7 +54,7 @@ const LoginForm = () => {
             </div>
             <div>
                 <ButtonWrapper>
-                <Button type="primary" htmlType="submit" loading={false}>Login</Button>
+                <Button type="primary" htmlType="submit" loading={isLoggingIn}>Login</Button>
                 <Link href="/signup"><a>Signup</a></Link>
                 </ButtonWrapper>
             </div>
