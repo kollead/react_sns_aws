@@ -23,14 +23,22 @@ export const initialState = {
             },
             content: "first comments"
         }],
-        imagePaths: [],
-        postAdded: false
-    }]
+    }],
+    imagePaths: [],
+    addPostLoading: false,
+    addPostDone: false,
+    addPostError: null,
+    addCommentLoading: false,
+    addCommentDone: false,
+    addCommentError: null
 }
 
-const ADD_POST_REQUEST = "ADD_POST_REQUEST"
-const ADD_POST_SUCCESS = "ADD_POST_SUCCESS"
-const ADD_POST_FAILURE = "ADD_POST_FAILURE"
+export const ADD_POST_REQUEST = "ADD_POST_REQUEST"
+export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS"
+export const ADD_POST_FAILURE = "ADD_POST_FAILURE"
+export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST"
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS"
+export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE"
 
 export const addPost = (data) => {
     return {type: ADD_POST_REQUEST, data}
@@ -39,7 +47,37 @@ export const addPost = (data) => {
 const reducer = (state=initialState, action) => {
     switch (action.type) {
         case ADD_POST_REQUEST : 
-            return {...state, content: action.data};
+            return {
+                ...state,
+                addPostLoading: true, 
+                addPostError: null
+            };
+        case ADD_POST_SUCCESS : 
+            return {
+                ...state,
+                mainPosts: [...state.mainPosts],
+                addPostLoading: false,
+                addPostDone: true
+            };
+        case ADD_POST_FAILURE : 
+            return {...state, addPostLoading: false,
+                addPostError: action.error}
+        case ADD_COMMENT_REQUEST : 
+            return {
+                ...state,
+                addCommentLoading: true, 
+                addCommentError: null
+            };
+        case ADD_COMMENT_SUCCESS : 
+            return {
+                ...state,
+                Comments: [...state.mainPosts.Comments],
+                addCommentLoading: false,
+                addCommentDone: true
+            };
+        case ADD_COMMENT_FAILURE : 
+            return {...state, addCommentLoading: false,
+                addCommentError: action.error}
         default:
             return state;
     }

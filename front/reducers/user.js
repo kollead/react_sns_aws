@@ -1,7 +1,13 @@
 export const initialState = {
-    isLoggingIn: false,
-    isLoggedIn: false,
-    isLoggingOut: false,
+    logInLoading: false,
+    logInDone: false,
+    logInError: null,
+    logOutLoading: false,
+    logOutDone: false,
+    logOutError: null,
+    signUpLoading: false,
+    signUpDone: false,
+    signUpError: null,
     user: null,
     signUpData:{},
     loginData: {}
@@ -28,6 +34,16 @@ export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST'
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS'
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE'
 
+const dummyUser = (data) => ({
+    ...data,
+    nickname: "nick01",
+    id: 1,
+    Posts: [],
+    Following: [],
+    Follower: []
+
+})
+
 export const loginRequestAction=(data)=>{
     return {
         type: LOG_IN_REQUEST,
@@ -42,48 +58,72 @@ export const logoutRequestAction = () => {
 }
 
 
+
 const reducer = (state=initialState, action) => {
     switch (action.type) {
 
         case LOG_IN_REQUEST :
             return {                
                     ...state,
-                    isLoggingIn: true
+                    logInLoading: true,
+                    logInError: null
                 
             };
         case LOG_IN_SUCCESS :
             return {                
                     ...state,
-                    isLoggingIn: false,
-                    isLoggedIn:true, 
-                    user: {...action.data, nickname:"nick01"}
+                    logInLoading: false,
+                    logInDone:true, 
+                    user: dummyUser(action.data)
                 
             };
         case LOG_IN_FAILURE :
             return {                
                     ...state,
-                    isLoggingIn: false,
-                    isLoggedIn:false
+                    logInLoading: false,
+                    logInDone:false,
+                    logInError: action.error
                 
             };
 
         case LOG_OUT_REQUEST :
             return {
                     ...state,
-                    isLoggingOut: true            
+                    logOutLoading: true,   
+                    logOutError: null  //로딩시 에러 제거       
             };
         case LOG_OUT_SUCCESS :
             return {
                     ...state,
-                    isLoggingOut: false,
-                    isLoggedIn:false, 
+                    logOutLoading: false,
+                    logInDone:false,
+                    logOutDone:true, 
                     user: null                
             };
         case LOG_OUT_FAILURE :
             return {
                     ...state,
-                    isLoggingOut: false             
-            };    
+                    logOutLoading: false,
+                    logOutError: action.error             
+            };   
+            case SIGN_UP_REQUEST :
+                return {
+                        ...state,
+                        signUpLoading: true,   
+                        signUpError: null  //로딩시 에러 제거       
+                };
+            case SIGN_UP_SUCCESS :
+                return {
+                        ...state,
+                        signUpLoading: false,
+                        signUpDone:true              
+                };
+            case SIGN_UP_FAILURE :
+                return {
+                        ...state,
+                        signUpLoading: false,
+                        signUpError: action.error             
+                };    
         default:
             return state;
     }
