@@ -5,6 +5,8 @@ import {Form, Input, Checkbox, Button} from 'antd'
 import useInput from '../hooks/useInput'
 import Password from 'antd/lib/input/Password'
 import styled from 'styled-components'
+import { SIGN_UP_REQUEST } from '../reducers/user'
+import { useSelector } from 'react-redux'
 
 const ErrorMessage = styled.div`
     color: red;
@@ -12,9 +14,11 @@ const ErrorMessage = styled.div`
 
 const Signup = () => {
 
-    const [id, onChangeId] = useInput('')
+    const [email, onChangeEmail] = useInput('')
     const [nickname, onChangeNickname] = useInput('')
     const [password, onChangePassword] = useInput('')
+    const dispatch = useDispatch()
+    const {signUpLoading} = useSelector((state)=>state.user)
  
     const [passwordCheck, setPasswordCheck] = useState('')
     const [passwordError, setPasswordError] = useState(false)
@@ -43,7 +47,11 @@ const Signup = () => {
             if (! term) {
                 return setTermError(true);
             }
-            console.log(id, nickname, passwordCheck)
+            console.log(email, nickname, passwordCheck)
+            dispatch({
+                type= SIGN_UP_REQUEST,
+                data= {email, password, nickname}
+            })
         },[password, passwordCheck, term]
     );
 
@@ -56,7 +64,7 @@ const Signup = () => {
                     <div>
                         <label htmlFor="user-id">Id</label>
                         <br/>
-                        <Input name="user-id" value={id} required onChange={onChangeId}/>
+                        <Input name="user-id" value={email} required onChange={onChangeEmail}/>
                     </div>
                     <div>
                         <label htmlFor="user-nickname">Id</label>

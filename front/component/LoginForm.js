@@ -18,28 +18,28 @@ const FormWrapper = styled(Form)`
 const LoginForm = () => {
 
     const dispatch = useDispatch();
-    const [id, onChangeId] = useInput('')
+    const [email, onChangeEmail] = useInput('')
     const [password, onChangePassword]=useInput('')
-    const {isLoggingIn} = useSelector((state)=>state.user) 
+    const {LogInLoading} = useSelector((state)=>state.user) 
     
     //const style= useMemo(()=>({marginTop: 10}), []);
     //<ButtonWrapper style={style}>
 
     const onsubmitForm = useCallback(()=>{
-        console.log(id, password)
-        dispatch(loginRequestAction({id, password}));
+        console.log(email, password)
+        dispatch(loginRequestAction({email, password}));
         //setIsLoggedIn(true)
-    },[id, password])
+    },[email, password])
 
     return (
         <FormWrapper onFinish={onsubmitForm}>
             <div>
-                <label htmlFor="user-id" >ID</label>
+                <label htmlFor="user-email" >E-Mail</label>
                 <br/>
                 <Input 
-                    name="user-id" 
-                    value={id} 
-                    onChange={onChangeId} 
+                    name="user-email" 
+                    value={email} 
+                    onChange={onChangeEmail} 
                     required/>
             </div>
             <div>
@@ -54,7 +54,7 @@ const LoginForm = () => {
             </div>
             <div>
                 <ButtonWrapper>
-                <Button type="primary" htmlType="submit" loading={isLoggingIn}>Login</Button>
+                <Button type="primary" htmlType="submit" loading={LogInLoading}>Login</Button>
                 <Link href="/signup"><a>Signup</a></Link>
                 </ButtonWrapper>
             </div>
