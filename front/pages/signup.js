@@ -6,7 +6,7 @@ import useInput from '../hooks/useInput'
 import Password from 'antd/lib/input/Password'
 import styled from 'styled-components'
 import { SIGN_UP_REQUEST } from '../reducers/user'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 const ErrorMessage = styled.div`
     color: red;
@@ -49,8 +49,8 @@ const Signup = () => {
             }
             console.log(email, nickname, passwordCheck)
             dispatch({
-                type= SIGN_UP_REQUEST,
-                data= {email, password, nickname}
+                type: SIGN_UP_REQUEST,
+                data: {email, password, nickname}
             })
         },[password, passwordCheck, term]
     );
@@ -62,9 +62,9 @@ const Signup = () => {
                 </Head>
                 <Form onFinish={onsubmit}>
                     <div>
-                        <label htmlFor="user-id">Id</label>
+                        <label htmlFor="user-email">Email</label>
                         <br/>
-                        <Input name="user-id" value={email} required onChange={onChangeEmail}/>
+                        <Input name="user-email" value={email} type="email" required onChange={onChangeEmail}/>
                     </div>
                     <div>
                         <label htmlFor="user-nickname">Id</label>
@@ -92,7 +92,7 @@ const Signup = () => {
                         {termError && <ErrorMessage>You need to agree the statement</ErrorMessage>}
                     </div>
                     <div style={{marginTop: 10}}>
-                        <Button type="primary" htmlType="submit">Sign up</Button>
+                        <Button type="primary" htmlType="submit" loading={signUpLoading}>Sign up</Button>
                     </div>
                 </Form>
             </AppLayout>
