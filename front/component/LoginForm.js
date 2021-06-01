@@ -1,13 +1,12 @@
-import React, {useCallback} from 'react'
-import {Form, Input, Button} from 'antd'
-import Link from 'next/link'
-import styled from 'styled-components'
-import {useDispatch, useSelector} from 'react-redux'
-import useInput from '../hooks/useInput'
-import {loginRequestAction} from '../reducers/user'
+import React, {useCallback} from 'react';
+import {Form, Input, Button} from 'antd';
+import Link from 'next/link';
+import styled from 'styled-components';
+import {useDispatch, useSelector} from 'react-redux';
+import useInput from '../hooks/useInput';
+import {loginRequestAction} from '../reducers/user';
 
-
-const ButtonWrapper=styled.div`
+const ButtonWrapper = styled.div`
     margin-top: 10px;
 `;
 
@@ -16,29 +15,29 @@ const FormWrapper = styled(Form)`
 `;
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const [email, onChangeEmail] = useInput('');
+  const [password, onChangePassword] = useInput('');
+  const {LogInLoading} = useSelector((state) => state.user);
 
-    const dispatch = useDispatch();
-    const [email, onChangeEmail] = useInput('')
-    const [password, onChangePassword]=useInput('')
-    const {LogInLoading} = useSelector((state)=>state.user) 
-    
-    //const style= useMemo(()=>({marginTop: 10}), []);
-    //<ButtonWrapper style={style}>
+  // const style= useMemo(()=>({marginTop: 10}), []);
+  // <ButtonWrapper style={style}>
 
-    const onsubmitForm = useCallback(()=>{
-        console.log(email, password)
-        dispatch(loginRequestAction({email, password}));
-        //setIsLoggedIn(true)
-    },[email, password])
+  const onsubmitForm = useCallback(() => {
+    console.log(email, password);
+    dispatch(loginRequestAction({email, password}));
+    // setIsLoggedIn(true)
+  },
+  [email, password]);
 
-    return (
-        <FormWrapper onFinish={onsubmitForm}>
-            <div>
-                <label htmlFor="user-email" >E-Mail</label>
-                <br/>
-                <Input 
-                    name="user-email" 
-                    value={email} 
+  return (
+    <FormWrapper onFinish={onsubmitForm}>
+      <div>
+        <label htmlFor="user-email">E-Mail</label>
+        <br />
+        <Input
+          name="user-email"
+          value={email} 
                     type="email"
                     onChange={onChangeEmail} 
                     required/>

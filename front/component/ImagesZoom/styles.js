@@ -1,5 +1,5 @@
-import {CloseOutlined} from "@ant-design/icons"
-import styled, { createGlobalStyle } from 'styled-components'
+import {CloseOutlined} from '@ant-design/icons';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const Overlay = styled.div`
     position: fixed;
@@ -35,7 +35,7 @@ export const SlickWrapper = styled.div`
     height: calc(100%-44px);
     background: #090909;
 `;
-export const ImgWrapper=styled.div`
+export const ImgWrapper = styled.div`
     padding: 30px;
     text-align: center;
     & img {
