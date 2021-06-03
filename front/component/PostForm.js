@@ -38,7 +38,7 @@ function PostForm() {
         placeholder="Share your story"
       />
       <div>
-        <input type="file" multiple hidden ref={imageInput}/>
+        <input type="file" multiple hidden ref={imageInput} />
         <Button onClick={onClickImageUpload}>Image Upload</Button>
         <Button
           type="primary"

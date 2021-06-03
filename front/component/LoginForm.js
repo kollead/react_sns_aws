@@ -37,31 +37,31 @@ const LoginForm = () => {
         <br />
         <Input
           name="user-email"
-          value={email} 
-                    type="email"
-                    onChange={onChangeEmail} 
-                    required/>
-            </div>
-            <div>
-                <label htmlFor="user-password">PASSWORD</label>
-                <br/>
-                <Input 
-                    name="user-password" 
-                    type="password" 
-                    value={password} 
-                    onChange={onChangePassword} 
-                    required/>
-            </div>
-            <div>
-                <ButtonWrapper>
-                <Button type="primary" htmlType="submit" loading={LogInLoading}>Login</Button>
-                <Link href="/signup"><a>Signup</a></Link>
-                </ButtonWrapper>
-            </div>
-        </FormWrapper>        
-    );
-}
-
-
+          value={email}
+          type="email"
+          onChange={onChangeEmail}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="user-password">PASSWORD</label>
+        <br />
+        <Input
+          name="user-password"
+          type="password"
+          value={password}
+          onChange={onChangePassword}
+          required
+        />
+      </div>
+      <div>
+        <ButtonWrapper>
+          <Button type="primary" htmlType="submit" loading={LogInLoading}> Login </Button>
+          <Link href="/signup"><a> Signup </a></Link>
+        </ButtonWrapper>
+      </div>
+    </FormWrapper>
+  );
+};
 
 export default LoginForm;
