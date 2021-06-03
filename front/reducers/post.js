@@ -34,6 +34,17 @@ export const initialState = {
   addCommentError: null,
 };
 
+const dummyPost = (data) => ({
+  id: 2,
+  content: data,
+  User: {
+    id: 1,
+    nickname: '01',
+  },
+  Images: [],
+  Comments: [],
+});
+
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
@@ -59,7 +70,7 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostLoading: false,
         addPostDone: true,
       };

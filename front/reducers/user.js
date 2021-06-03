@@ -8,6 +8,9 @@ export const initialState = {
   signUpLoading: false, // 회원가입 시도 중
   signUpDone: false,
   signUpError: null,
+  changeNicknameLoading: false,
+  changeNicknameDone: false,
+  changeNicknameError: null,
   user: null, // 유저 정보
   signUpData: {},
   loginData: {},
@@ -116,6 +119,25 @@ const reducer = (state = initialState, action) => {
         ...state,
         signUpLoading: false,
         signUpError: action.error,
+      };
+    case CHANGE_NICKNAME_REQUEST:
+      return {
+        ...state,
+        changeNicknameLoading: true,
+        changeNicknameError: null,
+      };
+    case CHANGE_NICKNAME_SUCCESS:
+      return {
+        ...state,
+        changeNicknameLoading: false,
+        changeNicknameDone: true,
+      };
+    case CHANGE_NICKNAME_FAILURE:
+      return {
+        ...state,
+        changeNicknameLoading: false,
+        changeNicknameDone: false,
+        changeNicknameError: action.error,
       };
     default:
       return state;

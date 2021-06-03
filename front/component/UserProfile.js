@@ -17,9 +17,9 @@ const UserProfile = () => {
     <Card
       actions={[
         <>
-          <div key="twit">{user.Posts.length}<br />0</div>
-          <div key="followings">{user.Following.length}<br />0</div>
-          <div key="followers">{user.Follower.length}<br />0</div>
+          <div key="twit">Twit<br />{user.Posts.length}</div>
+          <div key="following">Following<br />{user.Following.length}</div>
+          <div key="follower">Follower<br />{user.Follower.length}</div>
         </>,
       ]}
     >
