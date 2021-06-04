@@ -40,13 +40,16 @@ export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
+export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+export const REMOVE_POST_TO_ME = 'REMOVE_POST_TO_ME';
+
 const dummyUser = (data) => ({
   ...data,
   nickname: 'nick01',
   id: 1,
   Posts: [],
-  Following: [],
-  Follower: [],
+  Following: [{nickname: 'nick02'}, {nickname: 'nick03'}],
+  Follower: [{nickname: 'nick04'}],
 
 });
 
@@ -138,6 +141,14 @@ const reducer = (state = initialState, action) => {
         changeNicknameLoading: false,
         changeNicknameDone: false,
         changeNicknameError: action.error,
+      };
+    case ADD_POST_TO_ME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          Posts: [{id: action.data}, ...state.user.Posts],
+        },
       };
     default:
       return state;

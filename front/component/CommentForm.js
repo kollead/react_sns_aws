@@ -9,7 +9,7 @@ function CommentForm({post}) {
   const dispatch = useDispatch();
   const [commentText, onChangeCommentText, setCommentText] = useInput('');
   const id = useSelector((state) => state.user.user?.id);
-  const {addCommentDone} = useSelector((state) => state.post.addCommentDone);
+  const {addCommentDone, addCommentLoading} = useSelector((state) => state.post);
 
   useEffect(() => {
     if (addCommentDone) {
@@ -35,9 +35,10 @@ function CommentForm({post}) {
           rows={4}
         />
         <Button
-          style={{position: 'absolute', right: 0, bottom: -40}}
+          style={{position: 'absolute', right: 0, bottom: -40, zIndex: 1}}
           type="primary"
           htmlType="submit"
+          loading={addCommentLoading}
         >
           Twit
         </Button>

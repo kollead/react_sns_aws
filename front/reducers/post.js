@@ -1,3 +1,5 @@
+import shortid from 'shortid';
+
 export const initialState = {
   mainPosts: [{
     id: 1,
@@ -19,7 +21,9 @@ export const initialState = {
       src: 'https://64.media.tumblr.com/a58a2b497ffb0d5d9a555fcfd5359293/b8dde5739efda089-b1/s2048x3072/6346221089420ddae7969d0b7d86ad04b495ff9a.png',
     }],
     Comments: [{
+      id: shortid.generate(),
       User: {
+        id: shortid.generate(),
         nickname: '02',
       },
       content: 'first comments',
@@ -35,14 +39,24 @@ export const initialState = {
 };
 
 const dummyPost = (data) => ({
-  id: 2,
-  content: data,
+  id: data.id,
+  content: data.content,
   User: {
     id: 1,
     nickname: '01',
   },
   Images: [],
   Comments: [],
+});
+
+const dummyComment = (data) => ({
+  id: shortid.generate(),
+  content: data,
+  User: {
+    id: 1,
+    nickname: '01',
+  },
+  Images: [],
 });
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -65,6 +79,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         addPostLoading: true,
+        addPostDone: false,
         addPostError: null,
       };
     case ADD_POST_SUCCESS:
@@ -83,15 +98,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         addCommentLoading: true,
+        addCommentDone: false,
         addCommentError: null,
       };
-    case ADD_COMMENT_SUCCESS:
+    case ADD_COMMENT_SUCCESS: {
+      const postIndex = state.mainPosts.findIndex((v) => v.id === action.data.postId);
+      const post = {...state.mainPosts[postIndex]};
+      post.Comments = [dummyComment(action.data.content), ...post.Comments];
+      const mainPosts = [...state.mainPosts];
+      mainPosts[postIndex] = post;
       return {
         ...state,
-        Comments: [...state.mainPosts.Comments],
+        mainPosts,
         addCommentLoading: false,
         addCommentDone: true,
       };
+    }
     case ADD_COMMENT_FAILURE:
       return {...state,
         addCommentLoading: false,
