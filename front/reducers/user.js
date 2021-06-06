@@ -41,7 +41,7 @@ export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
-export const REMOVE_POST_TO_ME = 'REMOVE_POST_TO_ME';
+export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
 
 const dummyUser = (data) => ({
   ...data,
@@ -148,6 +148,14 @@ const reducer = (state = initialState, action) => {
         user: {
           ...state.user,
           Posts: [{id: action.data}, ...state.user.Posts],
+        },
+      };
+    case REMOVE_POST_OF_ME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          Posts: state.user.Posts.filter((v) => v.id !== action.data),
         },
       };
     default:
