@@ -1,4 +1,5 @@
 import shortid from 'shortid';
+import produce from 'immer';
 
 export const initialState = {
   mainPosts: [{
@@ -82,22 +83,18 @@ export const removePost = (data) => ({
   type: REMOVE_POST_REQUEST, data,
 });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
     case ADD_POST_REQUEST:
-      return {
-        ...state,
-        addPostLoading: true,
-        addPostDone: false,
-        addPostError: null,
-      };
+      draft.addPostLoading = true;
+      draft.addPostDone = false;
+      draft.addPostError = null;
+      break;
     case ADD_POST_SUCCESS:
-      return {
-        ...state,
-        mainPosts: [dummyPost(action.data), ...state.mainPosts],
-        addPostLoading: false,
-        addPostDone: true,
-      };
+      draft.addPostLoading = false;
+      draft.addPostDone = true;
+      draft.mainPosts = [dummyPost(action.data), ...state.mainPosts];
+      break;
     case ADD_POST_FAILURE:
       return {...state,
         addPostLoading: false,
@@ -150,6 +147,6 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+});
 
 export default reducer;
