@@ -93,64 +93,41 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.user = null;
       break;
     case LOG_OUT_FAILURE:
-      return {
-        ...state,
-        logOutLoading: false,
-        logOutError: action.error,
-      };
+      draft.logOutLoading = false;
+      draft.logOutError = action.error;
+      break;
     case SIGN_UP_REQUEST:
-      return {
-        ...state,
-        signUpLoading: true,
-        signUpError: null, // 로딩시 에러 제거
-      };
+      draft.signUpLoading = true;
+      draft.signUpDone = false;
+      draft.signUpError = null;
+      break;
     case SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        signUpLoading: false,
-        signUpDone: true,
-      };
+      draft.signUpLoading = false;
+      draft.signUpDone = true;
+      break;
     case SIGN_UP_FAILURE:
-      return {
-        ...state,
-        signUpLoading: false,
-        signUpError: action.error,
-      };
+      draft.signUpLoading = false;
+      draft.signUpError = action.error;
+      break;
     case CHANGE_NICKNAME_REQUEST:
-      return {
-        ...state,
-        changeNicknameLoading: true,
-        changeNicknameError: null,
-      };
+      draft.changeNicknameLoading = true;
+      draft.changeNicknameDone = false;
+      draft.changeNicknameError = null;
+      break;
     case CHANGE_NICKNAME_SUCCESS:
-      return {
-        ...state,
-        changeNicknameLoading: false,
-        changeNicknameDone: true,
-      };
+      draft.changeNicknameLoading = false;
+      draft.changeNicknameDone = true;
+      break;
     case CHANGE_NICKNAME_FAILURE:
-      return {
-        ...state,
-        changeNicknameLoading: false,
-        changeNicknameDone: false,
-        changeNicknameError: action.error,
-      };
+      draft.changeNicknameLoading = false;
+      draft.changeNicknameError = action.error;
+      break;
     case ADD_POST_TO_ME:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          Posts: [{id: action.data}, ...state.user.Posts],
-        },
-      };
+      draft.user.Posts.unshift({id: action.data});
+      break;
     case REMOVE_POST_OF_ME:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          Posts: state.user.Posts.filter((v) => v.id !== action.data),
-        },
-      };
+      draft.user.Posts = draft.user.Posts.filter((v) => v.id !== action.data);
+      break;
     default:
       break;
   }
