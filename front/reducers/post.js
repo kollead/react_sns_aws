@@ -43,7 +43,7 @@ export const initialState = {
   removePostError: null,
 };
 
-initialState.mainPosts.concat(
+initialState.mainPosts = initialState.mainPosts.concat(
   Array(20).fill().map(() => ({
     id: shortid.generate(),
     User: {
