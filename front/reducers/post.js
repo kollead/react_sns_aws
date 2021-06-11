@@ -26,7 +26,7 @@ export const generateDummyPost = (number) => Array(number).fill().map(() => ({
     id: shortid.generate(),
     nickname: faker.name.findName(),
   },
-  content: faker.lorem.paragraph,
+  content: faker.lorem.paragraph(),
   Images: [{
     src: faker.image.image(),
   }],
@@ -38,6 +38,25 @@ export const generateDummyPost = (number) => Array(number).fill().map(() => ({
     content: faker.lorem.sentence(),
   }],
 }));
+
+const dummyPost = (data) => ({
+  id: data.id,
+  content: data.content,
+  User: {
+    id: 1,
+    nickname: 'nick01',
+  },
+  Images: [],
+  Comments: [],
+});
+const dummyComment = (data) => ({
+  id: shortid.generate(),
+  content: data,
+  User: {
+    id: 1,
+    nickname: 'nick01',
+  },
+});
 
 export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
 export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
@@ -65,19 +84,19 @@ export const removePost = (data) => ({
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
     case LOAD_POSTS_REQUEST:
-      draft.loadPostLoading = true;
-      draft.addPostDone = false;
-      draft.addPostError = null;
+      draft.loadPostsLoading = true;
+      draft.loadPostsDone = false;
+      draft.loadPostsError = null;
       break;
     case LOAD_POSTS_SUCCESS:
-      draft.addPostLoading = false;
-      draft.addPostDone = true;
-      draft.mainPosts.unshift(action.data.concat(draft.mainPosts));
+      draft.loadPostsLoading = false;
+      draft.loadPostsDone = true;
+      draft.mainPosts = action.data.concat(draft.mainPosts);
       draft.hasMorePost = draft.mainPosts.length < 50;
       break;
     case LOAD_POSTS_FAILURE:
-      draft.addPostLoading = false;
-      draft.addPostError = action.error;
+      draft.loadPostsLoading = false;
+      draft.loadPostsError = action.error;
       break;
     case ADD_POST_REQUEST:
       draft.addPostLoading = true;

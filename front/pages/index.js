@@ -10,6 +10,17 @@ const Home = () => {
   useEffect(() => {
     dispatch({type: LOAD_POSTS_REQUEST});
   }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      console.log();
+    }
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   const {user} = useSelector((state) => state.user);
   const {mainPosts} = useSelector((state) => state.post);
   return (
