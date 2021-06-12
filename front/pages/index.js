@@ -6,23 +6,33 @@ import PostCard from '../component/PostCard';
 import {LOAD_POSTS_REQUEST} from '../reducers/post';
 
 const Home = () => {
+  const {user} = useSelector((state) => state.user);
+  const {mainPosts, hasMorePost, loadPostsLoading} = useSelector((state) => state.post);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({type: LOAD_POSTS_REQUEST});
   }, []);
 
   useEffect(() => {
     function onScroll() {
-      console.log();
+      console.log(window.scrollY, document.documentElement.clientHeight,
+        document.documentElement.scrollHeight);
+      if (window.scrollY + document.documentElement.clientHeight
+         === document.documentElement.scrollHeight > 300) {
+        if (hasMorePost && !loadPostsLoading) {
+          dispatch({
+            type: LOAD_POSTS_REQUEST,
+          });
+        }
+      }
     }
     window.addEventListener('scroll', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [hasMorePost, loadPostsLoading]);
 
-  const {user} = useSelector((state) => state.user);
-  const {mainPosts} = useSelector((state) => state.post);
   return (
     <AppLayout>
       {user && <PostForm />}
