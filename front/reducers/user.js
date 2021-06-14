@@ -14,7 +14,11 @@ export const initialState = {
   changeNicknameDone: false,
   changeNicknameError: null,
   followLoading: false,
+  followDone: false,
+  followError: null,
   unfollowLoading: false,
+  unfollowDone: false,
+  unfollowError: null,
   user: null, // 유저 정보
   signUpData: {},
   loginData: {},
@@ -137,7 +141,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case FOLLOW_SUCCESS:
       draft.followLoading = false;
-      draft.followDone = true;
+      draft.user.Following.push({id: action.data});
       draft.followDone = false;
       break;
     case FOLLOW_FAILURE:
@@ -151,7 +155,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case UNFOLLOW_SUCCESS:
       draft.unfollowLoading = false;
-      draft.unfollowDone = true;
+      draft.user.Following = draft.user.Following.filter((v) => v.id !== action.id);
       draft.unfollowDone = false;
       break;
     case UNFOLLOW_FAILURE:
