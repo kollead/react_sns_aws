@@ -13,6 +13,8 @@ export const initialState = {
   changeNicknameLoading: false,
   changeNicknameDone: false,
   changeNicknameError: null,
+  followLoading: false,
+  unfollowLoading: false,
   user: null, // 유저 정보
   signUpData: {},
   loginData: {},
@@ -127,6 +129,34 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case REMOVE_POST_OF_ME:
       draft.user.Posts = draft.user.Posts.filter((v) => v.id !== action.data);
+      break;
+    case FOLLOW_REQUEST:
+      draft.followLoading = true;
+      draft.followDone = false;
+      draft.followError = null;
+      break;
+    case FOLLOW_SUCCESS:
+      draft.followLoading = false;
+      draft.followDone = true;
+      draft.followDone = false;
+      break;
+    case FOLLOW_FAILURE:
+      draft.followLoading = false;
+      draft.followError = action.error;
+      break;
+    case UNFOLLOW_REQUEST:
+      draft.unfollowLoading = true;
+      draft.unfollowDone = false;
+      draft.unfollowError = null;
+      break;
+    case UNFOLLOW_SUCCESS:
+      draft.unfollowLoading = false;
+      draft.unfollowDone = true;
+      draft.unfollowDone = false;
+      break;
+    case UNFOLLOW_FAILURE:
+      draft.unfollowLoading = false;
+      draft.unfollowError = action.error;
       break;
     default:
       break;
