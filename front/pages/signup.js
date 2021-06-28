@@ -2,7 +2,6 @@ import React, {useCallback, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Head from 'next/head';
 import {Form, Input, Checkbox, Button} from 'antd';
-import Password from 'antd/lib/input/Password';
 import styled from 'styled-components';
 import AppLayout from '../component/AppLayout';
 import useInput from '../hooks/useInput';
@@ -21,6 +20,7 @@ const Signup = () => {
 
   const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
@@ -69,12 +69,12 @@ const Signup = () => {
           <Input name="user-nickname" value={nickname} required onChange={onChangeNickname} />
         </div>
         <div>
-          <label htmlFor="user-password">Id</label>
+          <label htmlFor="user-password">Password</label>
           <br />
-          <Input name="user-password" type="password" value={Password} required onChange={onChangePassword} />
+          <Input name="user-password" type="password" value={password} required onChange={onChangePassword} />
         </div>
         <div>
-          <label htmlFor="user-id">Id</label>
+          <label htmlFor="user-id">Password Check</label>
           <br />
           <Input
             name="user-password-check"

@@ -10,6 +10,9 @@ function loginAPI(data) {
 function logoutAPI() {
   return axios.post('/api/logout');
 }
+function signUpAPI(data) {
+  return axios.post('http://localhost:3065/user', data);
+}
 function followAPI(data) {
   return axios.post('/api/follow', data);
 }
@@ -47,9 +50,10 @@ function* logOut() {
     });
   }
 }
-function* signUp() {
-  yield delay(1000);
+function* signUp(action) {
   try {
+    const result = yield call(signUpAPI, action.data);
+    console.log(result);
     yield put({
       type: SIGN_UP_SUCCESS,
     });
