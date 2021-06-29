@@ -5,13 +5,13 @@ import {LOG_IN_SUCCESS, LOG_IN_FAILURE, LOG_IN_REQUEST,
   SIGN_UP_SUCCESS, SIGN_UP_FAILURE, SIGN_UP_REQUEST, FOLLOW_REQUEST, UNFOLLOW_REQUEST, FOLLOW_SUCCESS, UNFOLLOW_SUCCESS, FOLLOW_FAILURE, UNFOLLOW_FAILURE} from '../reducers/user';
 
 function loginAPI(data) {
-  return axios.post('/api/login', data);
+  return axios.post('/user/login', data);
 }
 function logoutAPI() {
   return axios.post('/api/logout');
 }
 function signUpAPI(data) {
-  return axios.post('http://localhost:3065/user', data);
+  return axios.post('/user', data);
 }
 function followAPI(data) {
   return axios.post('/api/follow', data);
@@ -22,11 +22,10 @@ function unfollowAPI(data) {
 
 function* logIn(action) {
   try {
-    // const result = yield call(loginAPI, action.data)
-    yield delay(1000);
+    const result = yield call(loginAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({

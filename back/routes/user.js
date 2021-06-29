@@ -4,6 +4,10 @@ const { User } = require('../models');
 
 const router = express.Router();
 
+router.post('/login', (req, res) => {
+
+});
+
 router.post('/', async (req, res, next) => {
   try {
     const exUser = await User.findOne({
@@ -18,7 +22,7 @@ router.post('/', async (req, res, next) => {
     await User.create({
       email: req.body.email,
       nickname: req.body.nickname,
-      password: req.body.password,
+      password: hashedPassword,
   });
   res.status(200).send('ok');
   } catch (error) {
