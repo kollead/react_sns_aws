@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOG_IN_SUCCESS:
       draft.logInLoading = false;
       draft.logOutDone = true;
-      draft.user = dummyUser(action.data);
+      draft.user = action.data;
       break;
     case LOG_IN_FAILURE:
       draft.logInLoading = false;

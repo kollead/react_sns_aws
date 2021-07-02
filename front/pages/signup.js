@@ -17,11 +17,16 @@ const Signup = () => {
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
   const dispatch = useDispatch();
-  const {signUpLoading, signUpDone, signUpError} = useSelector((state) => state.user);
+  const {signUpLoading, signUpDone, signUpError, user} = useSelector((state) => state.user);
 
   useEffect(() => {
+    if (user && user.id) {
+      Router.replace('/');
+    }
+  }, [user && user.id]);
+  useEffect(() => {
     if (signUpDone) {
-      Router.push('/');
+      Router.replace('/');
     }
   }, [signUpDone]);
   useEffect(() => {

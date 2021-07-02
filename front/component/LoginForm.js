@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Form, Input, Button} from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -18,10 +18,16 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
-  const {LogInLoading} = useSelector((state) => state.user);
+  const {logInLoading, loginError} = useSelector((state) => state.user);
 
   // const style= useMemo(()=>({marginTop: 10}), []);
   // <ButtonWrapper style={style}>
+
+  useEffect(() => {
+    if (loginError) {
+      alert(loginError);
+    }
+  }, [loginError]);
 
   const onsubmitForm = useCallback(() => {
     console.log(email, password);
@@ -56,7 +62,7 @@ const LoginForm = () => {
       </div>
       <div>
         <ButtonWrapper>
-          <Button type="primary" htmlType="submit" loading={LogInLoading}> Login </Button>
+          <Button type="primary" htmlType="submit" loading={logInLoading}> Login </Button>
           <Link href="/signup"><a> Signup </a></Link>
         </ButtonWrapper>
       </div>
