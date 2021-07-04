@@ -30,7 +30,7 @@ function* logIn(action) {
   } catch (error) {
     yield put({
       type: LOG_IN_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }

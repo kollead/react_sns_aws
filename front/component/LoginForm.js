@@ -18,16 +18,16 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
-  const {logInLoading, loginError} = useSelector((state) => state.user);
+  const {logInLoading, logInError} = useSelector((state) => state.user);
 
   // const style= useMemo(()=>({marginTop: 10}), []);
   // <ButtonWrapper style={style}>
 
   useEffect(() => {
-    if (loginError) {
-      alert(loginError);
+    if (logInError) {
+      alert(logInError);
     }
-  }, [loginError]);
+  }, [logInError]);
 
   const onsubmitForm = useCallback(() => {
     console.log(email, password);
