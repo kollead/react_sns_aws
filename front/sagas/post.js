@@ -13,7 +13,7 @@ function addPostAPI(data) {
   return axios.post('/post', {content: data});
 }
 function addCommentAPI(data) {
-  return axios.post(`/api/post/${data.postId}}/comment`, data);
+  return axios.post(`/post/${data.postId}}/comment`, data);
 }
 function removeCommentAPI(data) {
   return axios.post('/api/post', data);
@@ -40,11 +40,10 @@ function* addPost(action) {
 
 function* addComment(action) {
   try {
-    // const result = yield call(addCommentAPI, action.data);
-    yield delay(1000);
+    const result = yield call(addCommentAPI, action.data);
     yield put({
       type: ADD_COMMENT_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
