@@ -7,6 +7,22 @@ const db = require('../models');
 
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const user = await User.findOne({
+        where: {id: req.user.id}
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(200).json(null);
+    }
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+})
+
 router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
