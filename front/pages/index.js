@@ -4,6 +4,7 @@ import AppLayout from '../component/AppLayout';
 import PostForm from '../component/PostForm';
 import PostCard from '../component/PostCard';
 import {LOAD_POSTS_REQUEST} from '../reducers/post';
+import {LOAD_USER_INFO_REQUEST} from '../reducers/user';
 
 const Home = () => {
   const {user} = useSelector((state) => state.user);
@@ -11,6 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch({type: LOAD_USER_INFO_REQUEST});
     dispatch({type: LOAD_POSTS_REQUEST});
   }, []);
 

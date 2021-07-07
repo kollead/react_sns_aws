@@ -7,7 +7,7 @@ import {ADD_POST_REQUEST, ADD_POST_SUCCESS,
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 
 function loadPostAPI(data) {
-  return axios.post('/api/post, data');
+  return axios.post('/post', data);
 }
 function addPostAPI(data) {
   return axios.post('/post', {content: data});
@@ -74,10 +74,10 @@ function* removePost(action) {
 
 function* loadPosts(action) {
   try {
-    yield delay(1000);
+    const result = yield call(loadPostAPI, action.data);
     yield put({
       type: LOAD_POSTS_SUCCESS,
-      data: generateDummyPost(10),
+      data: result.data,
     });
   } catch (error) {
     yield put({

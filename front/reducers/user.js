@@ -7,6 +7,9 @@ export const initialState = {
   logOutLoading: false, // 로그아웃 시도 중
   logOutDone: false,
   logOutError: null,
+  loadUserLoading: false, // 유저 정보 가져오기 시도 중
+  loadUserDone: false,
+  loadUserError: null,
   signUpLoading: false, // 회원가입 시도 중
   signUpDone: false,
   signUpError: null,
@@ -36,6 +39,10 @@ export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
+export const LOAD_USER_INFO_REQUEST = 'LOAD_USER_INFO_REQUEST';
+export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_INFO_SUCCESS';
+export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_INFO_FAILURE';
+
 export const CHANGE_NICKNAME_REQUEST = 'SIGN_UP_REQUEST';
 export const CHANGE_NICKNAME_SUCCESS = 'SIGN_UP_SUCCESS';
 export const CHANGE_NICKNAME_FAILURE = 'SIGN_UP_FAILURE';
@@ -50,16 +57,6 @@ export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
 export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
-
-const dummyUser = (data) => ({
-  ...data,
-  nickname: 'nick01',
-  id: 1,
-  Posts: [],
-  Following: [{nickname: 'nick02'}, {nickname: 'nick03'}],
-  Follower: [{nickname: 'nick04'}],
-
-});
 
 export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
@@ -101,6 +98,20 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case LOG_OUT_FAILURE:
       draft.logOutLoading = false;
       draft.logOutError = action.error;
+      break;
+    case LOAD_USER_INFO_REQUEST:
+      draft.loadUserLoading = true;
+      draft.loadUserDone = false;
+      draft.loadUserError = null;
+      break;
+    case LOAD_USER_INFO_SUCCESS:
+      draft.loadUserLoading = false;
+      draft.loadUserDone = true;
+      draft.user = action.data;
+      break;
+    case LOAD_USER_INFO_FAILURE:
+      draft.loadUserLoading = false;
+      draft.loadUserError = action.error;
       break;
     case SIGN_UP_REQUEST:
       draft.signUpLoading = true;
