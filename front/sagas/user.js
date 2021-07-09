@@ -135,6 +135,7 @@ function* watchUnfollow() {
 function* watchLoadUser() {
   yield takeLatest(LOAD_USER_INFO_REQUEST, loadUser);
 }
+
 export default function* userSaga() {
   yield all([
     fork(watchLogin),

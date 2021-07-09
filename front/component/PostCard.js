@@ -10,14 +10,24 @@ import FollowButton from './FollowButton';
 import { REMOVE_POST_REQUEST } from '../reducers/post';
 
 function PostCard({post}) {
-  const [liked, setLiked] = useState(false);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
   const id = useSelector((state) => state.user.user?.id);
   const {removePostLoading} = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  const onToggleLike = useCallback(
+  const onLike = useCallback(
     () => {
-      setLiked((prev) => !prev);
+      dispatch({
+        type: LIKE_POST_REQUEST,
+        data: post.id,
+      });
+    }, [],
+  );
+  const onUnLike = useCallback(
+    () => {
+      dispatch({
+        type: UNLIKE_POST_REQUEST,
+        data: post.id,
+      });
     }, [],
   );
 
@@ -41,8 +51,8 @@ function PostCard({post}) {
         actions={[
           <RetweetOutlined key="retweet" />,
           liked
-            ? <HeartFilled key="heart" onClick={onToggleLike} />
-            : <HeartOutlined key="heart" onClick={onToggleLike} />,
+            ? <HeartFilled key="heart" onClick={onLike} />
+            : <HeartOutlined key="heart" onClick={onUnLike} />,
           <MessageOutlined key="comment" onClick={onToggleComment} />,
           <Popover
             key="more"
