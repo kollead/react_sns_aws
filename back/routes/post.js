@@ -30,6 +30,25 @@ router.post('/', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
+
+router.patch('/:postId/like', async(req, res, next) => { // PATCH /post/postid/like
+  try {
+    const post = await Post.findOne({
+      where: {id: req.params.postId}
+    });
+    if (!post) {
+      return res.status(403).send('존재하지 않는 게시글입니다.');
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.delete('/:postId/like', (req, res, next) => {
+
+});
+
 router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
   try {
     const post = await Post.findOne({
@@ -55,6 +74,6 @@ router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
     console.error(error);
     next(error);
   }
-})
+});
 
 module.exports = router;
