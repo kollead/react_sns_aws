@@ -151,10 +151,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.likePostsDone = false;
       draft.likePostsError = null;
       break;
-    case LIKE_POST_SUCCESS:
+    case LIKE_POST_SUCCESS: {
+      const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+      post.Likers.push({id: action.data.UserId});
       draft.likePostsLoading = false;
       draft.likePostsDone = true;
       break;
+    }
     case LIKE_POST_FAILURE:
       draft.likePostsLoading = false;
       draft.likePostsError = action.error;
@@ -164,10 +167,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.unlikePostsDone = false;
       draft.unlikePostsError = null;
       break;
-    case UNLIKE_POST_SUCCESS:
+    case UNLIKE_POST_SUCCESS: {
+      const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+      post.Likers = post.Likers.filter((v) => v.id === action.data.UserId);
       draft.unlikePostsLoading = false;
       draft.unlikePostsDone = true;
       break;
+    }
     case UNLIKE_POST_FAILURE:
       draft.unlikePostsLoading = false;
       draft.unlikePostsError = action.error;

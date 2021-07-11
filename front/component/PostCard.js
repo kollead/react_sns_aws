@@ -7,7 +7,7 @@ import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import FollowButton from './FollowButton';
-import { REMOVE_POST_REQUEST } from '../reducers/post';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 
 function PostCard({post}) {
   const [commentFormOpened, setCommentFormOpened] = useState(false);
@@ -44,6 +44,7 @@ function PostCard({post}) {
       });
     }, [],
   );
+  const liked = post.Likers.find((v) => v.id === id);
   return (
     <div style={{marginBottom: 10}}>
       <Card
@@ -112,6 +113,7 @@ PostCard.propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
     Comments: PropTypes.arrayOf(PropTypes.object),
+    Likers: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };

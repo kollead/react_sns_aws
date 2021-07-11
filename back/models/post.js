@@ -1,3 +1,5 @@
+const { post } = require("../routes/post");
+
 module.exports = (sequelize, DataTypes) => {
     const Post = sequelize.define('Post', {
       content: {
@@ -9,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       collate: 'utf8mb4_general_ci',
     });
     Post.associate = (db) => {
-      db.Post.belongsTo(db.User);
-      db.Post.hasMany(db.Comment);
-      db.Post.hasMany(db.Image);
-      db.Post.belongsToMany(db.Hashtag, {through: 'PostHashtag'});
-      db.Post.belongsToMany(db.User,  {through: 'Like', as: 'Likers'});
-      db.Post.belongsTo(db.Post, {as: 'Retweet'})
+      db.Post.belongsTo(db.User); //post.addUser post.getUser post.setUser
+      db.Post.hasMany(db.Comment); //post.addComments post.getComments
+      db.Post.hasMany(db.Image); //post.addImages
+      db.Post.belongsToMany(db.Hashtag, {through: 'PostHashtag'}); //post.addHashtags
+      db.Post.belongsToMany(db.User,  {through: 'Like', as: 'Likers'}); //post.addLikers post.removeLikers
+      db.Post.belongsTo(db.Post, {as: 'Retweet'}) //post.addRetweet
     };
     return Post;
   }
