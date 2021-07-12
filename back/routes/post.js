@@ -67,6 +67,20 @@ router.delete('/:postId/like', isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.delete('/:postId', isLoggedIn, async (req, res, next) => {
+  try {
+    
+    await Post.destroy({
+      where: {id: req.params.postId},
+      UserId: req.user.id,
+    });
+    res.status(200).json({PostId: req.params.postId});
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
   try {
     const post = await Post.findOne({
