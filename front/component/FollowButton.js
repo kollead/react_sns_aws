@@ -21,7 +21,7 @@ const FollowButton = ({post}) => {
           data: post.user.id,
         });
       }
-    }, [],
+    }, [isFollowing],
   );
   if (post.User.id === user.id) {
     return null;

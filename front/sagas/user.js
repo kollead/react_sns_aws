@@ -22,10 +22,10 @@ function signUpAPI(data) {
   return axios.post('/user', data);
 }
 function followAPI(data) {
-  return axios.post('/api/follow', data);
+  return axios.patch(`/user/${data}/unfollow`);
 }
 function unfollowAPI(data) {
-  return axios.post('/api/unfollow', data);
+  return axios.delete(`/user/${data}/unfollow`);
 }
 function changeNicknameAPI(data) {
   return axios.patch('/user/nickname', {nickname: data});
@@ -88,11 +88,11 @@ function* signUp(action) {
   }
 }
 function* follow(action) {
-  yield delay(1000);
+  const result = yield call(followAPI, action.data);
   try {
     yield put({
       type: FOLLOW_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
@@ -102,11 +102,11 @@ function* follow(action) {
   }
 }
 function* unfollow(action) {
-  yield delay(1000);
+  const result = yield call(unfollowAPI, action.data);
   try {
     yield put({
       type: UNFOLLOW_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
@@ -116,11 +116,11 @@ function* unfollow(action) {
   }
 }
 function* changeNickname(action) {
-  yield call();
+  const result = yield call(changeNicknameAPI, action.data);
   try {
     yield put({
       type: CHANGE_NICKNAME_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     yield put({
