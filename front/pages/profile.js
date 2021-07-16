@@ -15,13 +15,16 @@ const Profile = () => {
     if (!(user && user.id)) {
       Router.push('/');
     }
+  }, [user && user.id]);
+
+  useEffect(() => {
     dispatch({
       type: LOAD_FOLLOWERS_REQUEST,
     });
     dispatch({
       type: LOAD_FOLLOWINGS_REQUEST,
     });
-  }, [user, user.id]);
+  }, []);
 
   if (!user) {
     return null;
@@ -34,8 +37,8 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NickNameEditForm />
-        <FollowList header="Following List" data={user.Followings} />
-        <FollowList header="Follower List" data={user.Followers} />
+        <FollowList header="Following List" data={user.Following} />
+        <FollowList header="Follower List" data={user.Follower} />
       </AppLayout>
     </>
   );

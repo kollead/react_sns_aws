@@ -25,10 +25,14 @@ function signUpAPI(data) {
   return axios.post('/user', data);
 }
 function followAPI(data) {
-  return axios.patch(`/user/${data}/unfollow`);
+  return axios.patch(`/user/${data}/follow`, {
+    withCredentials: true,
+  });
 }
 function unfollowAPI(data) {
-  return axios.delete(`/user/${data}/unfollow`);
+  return axios.delete(`/user/${data}/unfollow`, {
+    withCredentials: true,
+  });
 }
 function changeNicknameAPI(data) {
   return axios.patch('/user/nickname', {nickname: data});
@@ -37,7 +41,7 @@ function loadFollowersAPI(data) {
   return axios.get('/user/followers', data);
 }
 function loadFollowingsAPI(data) {
-  return axios.get('/followings', data);
+  return axios.get('/user/followings', data);
 }
 
 function* logIn(action) {

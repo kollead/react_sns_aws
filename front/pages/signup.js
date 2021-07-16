@@ -54,7 +54,7 @@ const Signup = () => {
     }, [],
   );
 
-  const onsubmit = useCallback(
+  const onSignUp = useCallback(
     () => {
       if (password !== passwordCheck) {
         return setPasswordError(true);
@@ -74,7 +74,7 @@ const Signup = () => {
       <Head>
         <title>Sign Up | NodeBird</title>
       </Head>
-      <Form onFinish={onsubmit}>
+      <Form onFinish={onSignUp}>
         <div>
           <label htmlFor="user-email">Email</label>
           <br />

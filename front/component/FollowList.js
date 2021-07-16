@@ -1,9 +1,18 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import {List, Button, Card} from 'antd';
 import PropTypes from 'prop-types';
 import {stopOutLined} from '@ant-design/icons';
+import { UNFOLLOW_REQUEST } from '../reducers/user';
 
 function FollowList({header, data}) {
+  const dispatch = useDispatch();
+  const onCancle = (id) => () => {
+    dispatch({
+      type: UNFOLLOW_REQUEST,
+      data: id,
+    });
+  };
   return (
     <List
       style={{marginBottom: 20}}
@@ -15,7 +24,9 @@ function FollowList({header, data}) {
       dataSource={data}
       renderItem={(item) => (
         <List.Item style={{marginTop: 20}}>
-          <Card actions={[<stopOutLined key="stop" />]}>
+          <Card actions={[
+            <stopOutLined key="stop" onClick={onCancle(item.id)} />]}
+          >
             <Card.Meta description={item.nickname} />
           </Card>
         </List.Item>
