@@ -8,7 +8,7 @@ import {LOG_IN_SUCCESS, LOG_IN_FAILURE, LOG_IN_REQUEST,
   LOAD_USER_INFO_REQUEST, LOAD_USER_INFO_SUCCESS, LOAD_USER_INFO_FAILURE,
   CHANGE_NICKNAME_SUCCESS, CHANGE_NICKNAME_FAILURE, CHANGE_NICKNAME_REQUEST,
   LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE,
-  LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE} from '../reducers/user';
+  LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, REMOVE_FOLLOWER_REQUEST} from '../reducers/user';
 
 function loginAPI(data) {
   return axios.post('/user/login', data);
@@ -214,6 +214,10 @@ function* watchLoadFollowings() {
   yield takeLatest(LOAD_FOLLOWINGS_REQUEST, loadFollowings);
 }
 
+function* watchRemoveFollower() {
+  yield takeLatest(REMOVE_FOLLOWER_REQUEST, removeFollower);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogin),
@@ -225,5 +229,6 @@ export default function* userSaga() {
     fork(watchChangeNickname),
     fork(watchLoadFollowers),
     fork(watchLoadFollowings),
+    fork(watchRemoveFollower),
   ]);
 }

@@ -3,13 +3,19 @@ import {useDispatch} from 'react-redux';
 import {List, Button, Card} from 'antd';
 import PropTypes from 'prop-types';
 import {stopOutLined} from '@ant-design/icons';
-import { UNFOLLOW_REQUEST } from '../reducers/user';
+import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
 function FollowList({header, data}) {
   const dispatch = useDispatch();
   const onCancle = (id) => () => {
+    if (header === 'Following') {
+      dispatch({
+        type: UNFOLLOW_REQUEST,
+        data: id,
+      });
+    }
     dispatch({
-      type: UNFOLLOW_REQUEST,
+      type: REMOVE_FOLLOWER_REQUEST,
       data: id,
     });
   };
