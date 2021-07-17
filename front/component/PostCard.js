@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {Card, Popover, Button, Avatar, List, Comment} from 'antd';
-import {EllipsisOutlined, HeartOutlined, MessageOutlined, HeartFilled, RetweetOutlined} from '@ant-design/icons';
+import {EllipsisOutlined, HeartOutlined, MessageOutlined, HeartTwoTone, RetweetOutlined} from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
@@ -52,8 +52,8 @@ function PostCard({post}) {
         actions={[
           <RetweetOutlined key="retweet" />,
           liked
-            ? <HeartFilled key="heart" onClick={onLike} />
-            : <HeartOutlined key="heart" onClick={onUnLike} />,
+            ? <HeartTwoTone twoToneColor="eb2f96" key="heart" onClick={onUnLike} />
+            : <HeartOutlined key="heart" onClick={onLike} />,
           <MessageOutlined key="comment" onClick={onToggleComment} />,
           <Popover
             key="more"
