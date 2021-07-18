@@ -162,4 +162,18 @@ router.get('/followings', isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.delete('/follower/:userId', isLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findOne({where: {id: req.params.userId}});
+    if (!user) {
+      res.status(403).send("존재하지 않는 계정은 언팔로우 할 수 없습니다.");
+    }
+    await user.removeFollowing(req.user.id);
+    res.status(200).json({UserId: parseInt(req.params.userId, 10)});
+  } catch (error) {
+    console.error(error);
+    next(error)
+  }
+});
+
 module.exports = router;
