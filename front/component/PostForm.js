@@ -29,6 +29,13 @@ function PostForm() {
     [imageInput.current],
   );
 
+  const onChangeImages = useCallback(
+    (e) => {
+      console.log('images', e.target.files);
+    },
+    [],
+  );
+
   return (
     <Form style={{margin: '10px 0 20px'}} encType="multipart/form-data" onFinish={onSubmit}>
       <Input.TextArea
@@ -38,7 +45,7 @@ function PostForm() {
         placeholder="Share your story"
       />
       <div>
-        <input type="file" multiple hidden ref={imageInput} />
+        <input type="file" name="image" multiple hidden ref={imageInput} onChange={onChangeImages} />
         <Button onClick={onClickImageUpload}>Image Upload</Button>
         <Button
           type="primary"
