@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useEffect} from 'react';
 import { Form, Input, Button} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
-import {addPost} from '../reducers/post';
+import {addPost, UPLOAD_IMAGES_REQUEST} from '../reducers/post';
 import useInput from '../hooks/useInput';
 
 function PostForm() {
@@ -32,6 +32,24 @@ function PostForm() {
   const onChangeImages = useCallback(
     (e) => {
       console.log('images', e.target.files);
+      const imageFormData = new FormData();
+      [].forEach.call(e.target.files, (f) => {
+        imageFormData.append('image', f);
+      });
+      dispatch({
+        type: UPLOAD_IMAGES_REQUEST,
+        data: imageFormData,
+      });
+    },
+    [],
+  );
+
+  const imageOnClick = useCallback(
+    (index) => () => {
+      dispatch({
+        type: REMOVE_IMAGE,
+        data: index,
+      });
     },
     [],
   );
@@ -56,9 +74,13 @@ function PostForm() {
         </Button>
       </div>
       <div>
-        {imagePaths && imagePaths.map((v) => (
-          <div key={v} style={{display: 'inline-block'}}>
-            <img src={v} style={{width: '200px'}} alt={v} />
+        {imagePaths && imagePaths.map((v, i) => (
+          <div key={v} style={{display: 'inline-block'}} onClick={imageOnClick(i)} onKeyDown={imageOnClick(i)} role="presentation">
+            <img
+              src={`http://localhost:3065/${v}`}
+              style={{width: '200px'}}
+              alt={v}
+            />
             <div><Button>Remove</Button></div>
           </div>
         ))}

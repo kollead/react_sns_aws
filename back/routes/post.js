@@ -1,9 +1,20 @@
 const express = require('express');
-const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
 const {Post, Image, User, Comment} = require('../models');
 const {isLoggedIn} = require("./middleware");
+
+const router = express.Router();
+
+try {
+  fs.accessSync('uploads');
+} catch (error) {
+  console.log('uploads 폴더가 없으므로 생성합니다');
+  fs.mkdirSync('uploads');
+  
+}
 
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {

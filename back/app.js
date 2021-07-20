@@ -1,4 +1,5 @@
 const express = require('express');
+const path =  require('path');
 const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -26,6 +27,7 @@ app.use(cors({
   origin: true,
   credentials: true,
 }));
+app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(session({
