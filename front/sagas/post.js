@@ -12,7 +12,7 @@ function loadPostAPI(data) {
   return axios.get('/posts', data);
 }
 function addPostAPI(data) {
-  return axios.post('/post', {content: data});
+  return axios.post('/post', data);
 }
 function addCommentAPI(data) {
   return axios.post(`/post/${data.postId}}/comment`, data);
