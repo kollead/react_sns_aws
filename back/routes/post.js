@@ -3,8 +3,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const {Post, Image, User, Comment} = require('../models');
+const {Post, Image, User, Comment, Hashtag} = require('../models');
 const {isLoggedIn} = require("./middleware");
+const Hashtag = require('../models/Hashtag');
 
 const router = express.Router();
 
@@ -33,20 +34,28 @@ const upload = multer({
 
 router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
+    const hashtags = req.body.content.match(/#[^\s#]+/g);
     const post = await Post.create({
         content: req.body.content,
         UserId: req.user.id,
       });
-      if(req.body.image) {
-        if(Array.isArray(req.body.image)) { //images
-          const images = await Promise.all(req.body.image.map((image) => {
-            Image.create({src: image});
-          }))
-          await post.addImages(image)
-        } else { //1 image
-
-        }
+    if(hashtags) {
+      const result = await Promise.all(hashtags.map((tag) => Hashtag.findOrcreate({
+        where: {name: tag.slice(1).toLowerCase()},
+      }))); // [[hashtag1, true], [hashtag2. true]]
+      await post.addHashtags(result.map((v) => v[0]));
+    }
+    if(req.body.image) {
+      if(Array.isArray(req.body.image)) { //images
+        const images = await Promise.all(req.body.image.map((image) => {
+          Image.create({src: image});
+        }))
+        await post.addImages(images)
+      } else { //1 image
+        const image =await Image.create({src: req.body.image});
+        await post.addImages(image);
       }
+    }
     const fullPost = await Post.findOne({
       where: {id: post.id},
       include: [{
