@@ -33,7 +33,7 @@ function uploadImagesAPI(data) {
   return axios.post('/post/images', data);
 }
 function retweetAPI(data) {
-  return axios.post('/post', data);
+  return axios.post(`/post/${data}/retweet`);
 }
 
 function* addPost(action) {
