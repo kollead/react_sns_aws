@@ -218,7 +218,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res, next) => {
         attributes: ['id'],
       }]
     })
-    res.status(201).json(fullComment);
+    res.status(201).json(retweetWithPrevPost);
   } catch (error) {
     console.error(error);
     next(error);

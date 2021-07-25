@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Card, Popover, Button, Avatar, List, Comment} from 'antd';
 import {EllipsisOutlined, HeartOutlined, MessageOutlined, HeartTwoTone, RetweetOutlined} from '@ant-design/icons';
@@ -12,8 +12,14 @@ import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_RE
 function PostCard({post}) {
   const [commentFormOpened, setCommentFormOpened] = useState(false);
   const id = useSelector((state) => state.user.user?.id);
-  const {removePostLoading} = useSelector((state) => state.post);
+  const {removePostLoading, retweetError} = useSelector((state) => state.post);
   const dispatch = useDispatch();
+
+  /* useEffect(() => {
+    if(retweetError) {
+      alert(retweetError);
+    }
+  }, [retweetError]); */
 
   const onLike = useCallback(
     () => {
@@ -101,11 +107,18 @@ function PostCard({post}) {
         ]}
         extra={id && <FollowButton post={post} />}
       >
-        <Card.Meta
+        {post.RetweetId, && post.RetweetId
+          ? (
+            
+          )
+          : (
+            <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
           title={post.User.nickname}
           description={<PostCardContent postData={post.content} />}
         />
+          )
+        }
       </Card>
       {commentFormOpened && (
         <div>

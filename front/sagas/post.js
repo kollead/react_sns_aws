@@ -50,7 +50,7 @@ function* addPost(action) {
   } catch (error) {
     yield put({
       type: ADD_POST_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -65,7 +65,7 @@ function* addComment(action) {
   } catch (error) {
     yield put({
       type: ADD_COMMENT_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -84,7 +84,7 @@ function* removePost(action) {
   } catch (error) {
     yield put({
       type: REMOVE_POST_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -99,7 +99,7 @@ function* loadPosts(action) {
   } catch (error) {
     yield put({
       type: LOAD_POSTS_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -113,7 +113,7 @@ function* unlikePost(action) {
   } catch (error) {
     yield put({
       type: UNLIKE_POST_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -127,7 +127,7 @@ function* likePost(action) {
   } catch (error) {
     yield put({
       type: LIKE_POST_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -141,7 +141,7 @@ function* uploadImages(action) {
   } catch (error) {
     yield put({
       type: UPLOAD_IMAGES_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
@@ -155,7 +155,7 @@ function* retweet(action) {
   } catch (error) {
     yield put({
       type: RETWEET_FAILURE,
-      data: error.response.data,
+      error: error.response.data,
     });
   }
 }
