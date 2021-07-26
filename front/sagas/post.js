@@ -8,8 +8,8 @@ import {ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
   UNLIKE_POST_REQUEST, UNLIKE_POST_FAILURE, UNLIKE_POST_SUCCESS, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_SUCCESS, RETWEET_REQUEST, RETWEET_SUCCESS, RETWEET_FAILURE} from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 
-function loadPostAPI(data) {
-  return axios.get('/posts', data);
+function loadPostsAPI(lastId) {
+  return axios.get(`/posts?lastId=${lastId || 0}`, data);
 }
 function addPostAPI(data) {
   return axios.post('/post', data);
@@ -91,7 +91,7 @@ function* removePost(action) {
 
 function* loadPosts(action) {
   try {
-    const result = yield call(loadPostAPI, action.data);
+    const result = yield call(loadPostsAPI, action.data);
     yield put({
       type: LOAD_POSTS_SUCCESS,
       data: result.data,
