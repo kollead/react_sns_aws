@@ -5,7 +5,6 @@ const fs = require('fs');
 
 const {Post, Image, User, Comment, Hashtag} = require('../models');
 const {isLoggedIn} = require("./middleware");
-const Hashtag = require('../models/Hashtag');
 
 const router = express.Router();
 
