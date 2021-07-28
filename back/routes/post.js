@@ -171,7 +171,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res, next) => {
     if (!post) {
       return res.status(403).send('존재하지 않는 게시물입니다.')
     }
-    if (req.User.id === post.UserId || (post.Retweet && post.Retweet.UserId === req.user.id)) {
+    if (req.user.id === post.UserId || (post.Retweet && post.Retweet.UserId === req.user.id)) {
       return res.status(403).send('자신의 글은 리트윗 할 수 없습니다.');
     } 
     const retweetTargetId = post.RetweetId || post.id;

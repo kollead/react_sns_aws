@@ -6,10 +6,11 @@ const {Post, User, Image, Comment} = require('../models');
 router.get('/', async(req, res, next) => {
   try {
     const where = {};
-    if (parsInt(req.query.lastId, 10)) {
+    if (parseInt(req.query.lastId, 10)) {
       where.id = { [Op.lt] : parseInt(req.query.lastId, 10)}
     }
     const posts = await Post.findAll({
+      where,
       limit: 10,
       order: [
         ['createdAt', 'DESC'],

@@ -9,7 +9,7 @@ import {ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 
 function loadPostsAPI(lastId) {
-  return axios.get(`/posts?lastId=${lastId || 0}`, data);
+  return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 function addPostAPI(data) {
   return axios.post('/post', data);
