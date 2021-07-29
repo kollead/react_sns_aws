@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import wrapper from '../store/configureStore';
 import AppLayout from '../component/AppLayout';
 import PostForm from '../component/PostForm';
 import PostCard from '../component/PostCard';
@@ -13,8 +14,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({type: LOAD_USER_INFO_REQUEST});
-    dispatch({type: LOAD_POSTS_REQUEST});
+    
   }, []);
 
   useEffect(() => {
@@ -50,4 +50,15 @@ const Home = () => {
     </AppLayout>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps((context) => {
+  console.log('context: ', context);
+  context.store.dispatch({
+    type: LOAD_USER_INFO_REQUEST,
+  });
+  context.store.dispatch({
+    type: LOAD_POSTS_REQUEST,
+  });
+});
+
 export default Home;
