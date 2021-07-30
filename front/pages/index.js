@@ -1,21 +1,18 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {END} from 'redux-saga';
 import wrapper from '../store/configureStore';
 import AppLayout from '../component/AppLayout';
 import PostForm from '../component/PostForm';
 import PostCard from '../component/PostCard';
 import {LOAD_POSTS_REQUEST} from '../reducers/post';
-import {LOAD_USER_INFO_REQUEST} from '../reducers/user';
+import {LOAD_MY_INFO_REQUEST} from '../reducers/user';
 
 const Home = () => {
   const {user} = useSelector((state) => state.user);
   const {mainPosts, hasMorePost, loadPostsLoading,
     retweetError} = useSelector((state) => state.post);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    
-  }, []);
 
   useEffect(() => {
     if (retweetError) {
@@ -51,14 +48,16 @@ const Home = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps((context) => {
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
   console.log('context: ', context);
   context.store.dispatch({
-    type: LOAD_USER_INFO_REQUEST,
+    type: LOAD_MY_INFO_REQUEST,
   });
   context.store.dispatch({
     type: LOAD_POSTS_REQUEST,
   });
+  context.store.dispatch(END);
+  await context.store.sagaTask.toPromise();
 });
 
 export default Home;
