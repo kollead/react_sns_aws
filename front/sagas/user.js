@@ -22,8 +22,8 @@ function loadMyInfoAPI() {
     withCredentials: true,
   });
 }
-function loadUserAPI() {
-  return axios.get('/', {
+function loadUserAPI(data) {
+  return axios.get(`/user/${data}`, {
     withCredentials: true,
   });
 }
@@ -97,9 +97,9 @@ function* loadUser(action) {
   }
 }
 
-function* loadMyInfo(action) {
+function* loadMyInfo() {
   try {
-    const result = yield call(loadMyInfoAPI, action.data);
+    const result = yield call(loadMyInfoAPI);
     yield put({
       type: LOAD_MY_INFO_SUCCESS,
       data: result.data,
@@ -238,7 +238,7 @@ function* watchUnfollow() {
 }
 
 function* watchLoadUser() {
-  yield takeLatest(LOAD_MY_INFO_REQUEST, loadUser);
+  yield takeLatest(LOAD_USER_INFO_REQUEST, loadUser);
 }
 
 function* watchLoadMyInfo() {

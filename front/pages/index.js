@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import {END} from 'redux-saga';
 import wrapper from '../store/configureStore';
@@ -49,7 +50,8 @@ const Home = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-  console.log('context: ', context);
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cooke = cookie;
   context.store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
   });
