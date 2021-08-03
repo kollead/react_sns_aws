@@ -1,18 +1,13 @@
-import React, {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Head from 'next/head';
-import Router from 'next/router';
-import { Card } from 'antd';
+import { END } from 'redux-saga';
+import { Card, Avatar } from 'antd';
 import AppLayout from '../component/AppLayout';
-import NickNameEditForm from '../component/NickNameEditForm';
-import FollowList from '../component/FollowList';
-import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_USER_INFO_REQUEST } from '../reducers/user';
-import Avatar from 'antd/lib/avatar/avatar';
+import {LOAD_USER_INFO_REQUEST } from '../reducers/user';
 import wrapper from '../store/configureStore';
-import { END } from '@redux-saga/core';
 
 const About = () => {
-  const dispatch = useDispatch();
   const {userInfo} = useSelector((state) => state.user);
 
   return (
@@ -26,15 +21,15 @@ const About = () => {
             actions={[
               <div key="twit">
                 <br />
-                {userInfo.Posts}
+                {userInfo.Posts.length}
               </div>,
               <div key="following">
                 <br />
-                {userInfo.Following}
+                {userInfo.Following.length}
               </div>,
               <div key="follower">
                 <br />
-                {userInfo.Follower}
+                {userInfo.Follower.length}
               </div>,
             ]}
           >
@@ -51,12 +46,13 @@ const About = () => {
   );
 };
 
-export const getStaticProps = wrapper.getStaticProps(async(context) => {
+export const getStaticProps = wrapper.getStaticProps(async (context) => {
   context.store.dispatch({
     type: LOAD_USER_INFO_REQUEST,
     data: 1,
   });
   context.store.dispatch(END);
-})
+  await context.store.sagaTask.toPromise();
+});
 
 export default About;
