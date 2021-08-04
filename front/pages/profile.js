@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Head from 'next/head';
+import axios from 'axios';
+import { END } from 'redux-saga';
 import Router from 'next/router';
+import wrapper from '../store/configureStore';
 import AppLayout from '../component/AppLayout';
 import NickNameEditForm from '../component/NickNameEditForm';
 import FollowList from '../component/FollowList';
-import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST } from '../reducers/user';
+import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -53,9 +56,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
 
   context.store.dispatch({
     type: LOAD_MY_INFO_REQUEST,
-  });
-  context.store.dispatch({
-    type: LOAD_POSTS_REQUEST,
   });
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
