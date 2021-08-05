@@ -1,18 +1,19 @@
 // post/[id].js
 import React from 'react';
 import { END } from 'redux-saga';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
 import {LOAD_MY_INFO_REQUEST} from '../../reducers/user';
-import { LOAD_POSTS_REQUEST } from '../../reducers/post';
+import { LOAD_POST_REQUEST } from '../../reducers/post';
 import AppLayout from '../../component/AppLayout';
 import PostCard from '../../component/PostCard';
 
 const Post = () => {
   const router = useRouter();
   const {id} = router.query;
-  const {singlePost} = ((state) => state.post);
+  const {singlePost} = useSelector((state) => state.post);
 
   return (
     <AppLayout>
@@ -31,7 +32,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     type: LOAD_MY_INFO_REQUEST,
   });
   context.store.dispatch({
-    type: LOAD_POSTS_REQUEST,
+    type: LOAD_POST_REQUEST,
     data: context.params.id,
   });
   context.store.dispatch(END);

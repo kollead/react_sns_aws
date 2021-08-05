@@ -9,8 +9,15 @@ import {LOG_IN_SUCCESS, LOG_IN_FAILURE, LOG_IN_REQUEST,
   LOAD_USER_INFO_REQUEST, LOAD_USER_INFO_SUCCESS, LOAD_USER_INFO_FAILURE,
   CHANGE_NICKNAME_SUCCESS, CHANGE_NICKNAME_FAILURE, CHANGE_NICKNAME_REQUEST,
   LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE,
-  LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_FAILURE, REMOVE_FOLLOWER_SUCCESS} from '../reducers/user';
+  LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE,
+  REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_FAILURE, REMOVE_FOLLOWER_SUCCESS} from '../reducers/user';
 
+function loadFollowersAPI() {
+  return axios.get('/user/followers');
+}
+function loadFollowingsAPI() {
+  return axios.get('/user/followings');
+}
 function loginAPI(data) {
   return axios.post('/user/login', data);
 }
@@ -42,12 +49,6 @@ function unfollowAPI(data) {
 }
 function changeNicknameAPI(data) {
   return axios.patch('/user/nickname', {nickname: data});
-}
-function loadFollowersAPI(data) {
-  return axios.get('/user/followers', data);
-}
-function loadFollowingsAPI(data) {
-  return axios.get('/user/followings', data);
 }
 function removeFollowerAPI(data) {
   return axios.delete(`/user/follower/${data}`);
@@ -172,9 +173,9 @@ function* changeNickname(action) {
   }
 }
 
-function* loadFollowers(action) {
+function* loadFollowers() {
   try {
-    const result = yield call(loadFollowersAPI, action.data);
+    const result = yield call(loadFollowersAPI);
     yield put({
       type: LOAD_FOLLOWERS_SUCCESS,
       data: result.data,
@@ -187,9 +188,9 @@ function* loadFollowers(action) {
   }
 }
 
-function* loadFollowings(action) {
+function* loadFollowings() {
   try {
-    const result = yield call(loadFollowingsAPI, action.data);
+    const result = yield call(loadFollowingsAPI);
     yield put({
       type: LOAD_FOLLOWINGS_SUCCESS,
       data: result.data,

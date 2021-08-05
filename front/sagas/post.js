@@ -12,7 +12,9 @@ function loadPostsAPI(lastId) {
   return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 function loadPostAPI(data) {
-  return axios.get(`/post/${data}`);
+  return axios.get(`/post/${data}`, {
+    withCredentials: true,
+  });
 }
 function addPostAPI(data) {
   return axios.post('/post', data);
@@ -109,7 +111,7 @@ function* loadPosts(action) {
 
 function* loadPost(action) {
   try {
-    const result = yield call(loadPostAPI, action.lastId);
+    const result = yield call(loadPostAPI, action.data);
     yield put({
       type: LOAD_POST_SUCCESS,
       data: result.data,

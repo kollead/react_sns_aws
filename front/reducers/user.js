@@ -7,9 +7,12 @@ export const initialState = {
   logOutLoading: false, // 로그아웃 시도 중
   logOutDone: false,
   logOutError: null,
-  loadMyInfoLoading: false, // 유저 정보 가져오기 시도 중
+  loadMyInfoLoading: false, // 사용자 정보 가져오기 시도 중
   loadMyInfoDone: false,
   loadMyInfoError: null,
+  loadUserLoading: false, // 유저 정보 가져오기 시도 중
+  loadUserDone: false,
+  loadUserError: null,
   signUpLoading: false, // 회원가입 시도 중
   signUpDone: false,
   signUpError: null,
@@ -51,9 +54,9 @@ export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
 export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
 export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
 
-export const LOAD_USER_INFO_REQUEST = 'LOAD_USER_REQUEST';
-export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_SUCCESS';
-export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_FAILURE';
+export const LOAD_USER_INFO_REQUEST = 'LOAD_USER_INFO_REQUEST';
+export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_INFO_SUCCESS';
+export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_INFO_FAILURE';
 
 export const CHANGE_NICKNAME_REQUEST = 'CHANGE_NICKNAME_REQUEST';
 export const CHANGE_NICKNAME_SUCCESS = 'CHANGE_NICKNAME_SUCCESS';

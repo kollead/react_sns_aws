@@ -40,9 +40,9 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.get('/:userId', async (req, res, next) => {
-  console.log("req.headers: ", req.headers);
+router.get('/:userId', isNotLoggedIn, async (req, res, next) => {
   try {
+    console.log("유저인포 들어옴");
     const fullUserWithoutPassword = await User.findOne({
       where: {id: req.params.userId},
       attributes: {
@@ -187,6 +187,7 @@ router.delete('/:userId/unfollow', isLoggedIn, async (req, res, next) => {
 
 router.get('/followers', isLoggedIn, async (req, res, next) => {
   try {
+    console.log("팔로워 들어옴");
     const user = await User.findOne({where: {id: req.user.id}});
     const followers = await user.getFollower();
     res.status(200).json(followers);
@@ -198,6 +199,7 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
 
 router.get('/followings', isLoggedIn, async (req, res, next) => {
   try {
+    console.log("팔로윙 들어옴");
     const user = await User.findOne({where: {id: req.user.id}});
     const followings = await user.getFollowing();
     res.status(200).json(followings);
