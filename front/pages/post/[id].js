@@ -6,15 +6,18 @@ import axios from 'axios';
 import wrapper from '../../store/configureStore';
 import {LOAD_MY_INFO_REQUEST} from '../../reducers/user';
 import { LOAD_POSTS_REQUEST } from '../../reducers/post';
+import AppLayout from '../../component/AppLayout';
+import PostCard from '../../component/PostCard';
 
 const Post = () => {
   const router = useRouter();
   const {id} = router.query;
+  const {singlePost} = ((state) => state.post);
 
   return (
-    <div>
-      {id}번 게시글
-    </div>
+    <AppLayout>
+      <PostCard post={singlePost} />
+    </AppLayout>
   );
 };
 
