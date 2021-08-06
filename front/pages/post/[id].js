@@ -4,6 +4,7 @@ import { END } from 'redux-saga';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Head from 'next/head';
 import wrapper from '../../store/configureStore';
 import {LOAD_MY_INFO_REQUEST} from '../../reducers/user';
 import { LOAD_POST_REQUEST } from '../../reducers/post';
@@ -17,6 +18,17 @@ const Post = () => {
 
   return (
     <AppLayout>
+      <Head>
+        <title>
+          {singlePost.User.nickname}
+          님의 글
+        </title>
+        <meta name="" content={} />
+        <meta name="" content={} />
+        <meta name="" content={} />
+        <meta name="" content={} />
+        <meta name="" content={} />
+      </Head>
       <PostCard post={singlePost} />
     </AppLayout>
   );
