@@ -5,16 +5,20 @@ import {ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
   REMOVE_POST_REQUEST, REMOVE_POST_FAILURE, REMOVE_POST_SUCCESS,
   LOAD_POSTS_REQUEST, LOAD_POSTS_FAILURE, LOAD_POSTS_SUCCESS,
   LIKE_POST_REQUEST, LIKE_POST_FAILURE, LIKE_POST_SUCCESS,
-  UNLIKE_POST_REQUEST, UNLIKE_POST_FAILURE, UNLIKE_POST_SUCCESS, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_SUCCESS, RETWEET_REQUEST, RETWEET_SUCCESS, RETWEET_FAILURE, LOAD_POST_REQUEST, LOAD_POST_SUCCESS, LOAD_POST_FAILURE} from '../reducers/post';
+  UNLIKE_POST_REQUEST, UNLIKE_POST_FAILURE, UNLIKE_POST_SUCCESS, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_SUCCESS, RETWEET_REQUEST, RETWEET_SUCCESS, RETWEET_FAILURE, LOAD_POST_REQUEST, LOAD_POST_SUCCESS, LOAD_POST_FAILURE, LOAD_USER_POSTS_REQUEST, LOAD_USER_POSTS_SUCCESS, LOAD_USER_POSTS_FAILURE, LOAD_HASHTAG_POSTS_REQUEST, LOAD_HASHTAG_POSTS_SUCCESS, LOAD_HASHTAG_POSTS_FAILURE} from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 
 function loadPostsAPI(lastId) {
   return axios.get(`/posts?lastId=${lastId || 0}`);
 }
+function loadUserPostsAPI(lastId) {
+  return axios.get(`/posts?lastId=${lastId || 0}`);
+}
+function loadHashtagPostsAPI(lastId) {
+  return axios.get(`/posts?lastId=${lastId || 0}`);
+}
 function loadPostAPI(data) {
-  return axios.get(`/post/${data}`, {
-    withCredentials: true,
-  });
+  return axios.get(`/post/${data}`);
 }
 function addPostAPI(data) {
   return axios.post('/post', data);
@@ -109,6 +113,36 @@ function* loadPosts(action) {
   }
 }
 
+function* loadUserPosts(action) {
+  try {
+    const result = yield call(loadUserPostsAPI, action.lastId);
+    yield put({
+      type: LOAD_USER_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_USER_POSTS_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
+function* loadHashtagPosts(action) {
+  try {
+    const result = yield call(loadHashtagPostsAPI, action.lastId);
+    yield put({
+      type: LOAD_HASHTAG_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_HASHTAG_POSTS_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* loadPost(action) {
   try {
     const result = yield call(loadPostAPI, action.data);
@@ -193,6 +227,12 @@ function* watchRemovePost() {
 function* watchLoadPosts() {
   yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
 }
+function* watchLoadUserPosts() {
+  yield throttle(5000, LOAD_USER_POSTS_REQUEST, loadUserPosts);
+}
+function* watchLoadHashtagPosts() {
+  yield throttle(5000, LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts);
+}
 function* watchLikePost() {
   yield takeLatest(LIKE_POST_REQUEST, likePost);
 }
@@ -215,6 +255,8 @@ export default function* postSaga() {
     fork(watchAddComment),
     fork(watchRemovePost),
     fork(watchLoadPosts),
+    fork(watchLoadUserPosts),
+    fork(watchLoadHashtagPosts),
     fork(watchLikePost),
     fork(watchUnlikePost),
     fork(watchUploadImages),

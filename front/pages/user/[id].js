@@ -1,4 +1,4 @@
-// post/[id].js
+// user/[id].js
 import React from 'react';
 import { END } from 'redux-saga';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import axios from 'axios';
 import Head from 'next/head';
 import wrapper from '../../store/configureStore';
 import {LOAD_MY_INFO_REQUEST} from '../../reducers/user';
-import { LOAD_POST_REQUEST } from '../../reducers/post';
+import { LOAD_USER_POST_REQUEST } from '../../reducers/post';
 import AppLayout from '../../component/AppLayout';
 import PostCard from '../../component/PostCard';
 
@@ -44,7 +44,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     type: LOAD_MY_INFO_REQUEST,
   });
   context.store.dispatch({
-    type: LOAD_POST_REQUEST,
+    type: LOAD_USER_POST_REQUEST,
     data: context.params.id,
   });
   context.store.dispatch(END);
