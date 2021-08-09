@@ -11,11 +11,11 @@ import { ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 function loadPostsAPI(lastId) {
   return axios.get(`/posts?lastId=${lastId || 0}`);
 }
-function loadUserPostsAPI(lastId) {
-  return axios.get(`/posts?lastId=${lastId || 0}`);
+function loadUserPostsAPI(data, lastId) {
+  return axios.get(`/user/${data}/posts?lastId=${lastId || 0}`);
 }
-function loadHashtagPostsAPI(lastId) {
-  return axios.get(`/posts?lastId=${lastId || 0}`);
+function loadHashtagPostsAPI(data, lastId) {
+  return axios.get(`/hashtag/${data}?lastId=${lastId || 0}`);
 }
 function loadPostAPI(data) {
   return axios.get(`/post/${data}`);
@@ -115,7 +115,7 @@ function* loadPosts(action) {
 
 function* loadUserPosts(action) {
   try {
-    const result = yield call(loadUserPostsAPI, action.lastId);
+    const result = yield call(loadUserPostsAPI, action.data, action.lastId);
     yield put({
       type: LOAD_USER_POSTS_SUCCESS,
       data: result.data,
@@ -130,7 +130,7 @@ function* loadUserPosts(action) {
 
 function* loadHashtagPosts(action) {
   try {
-    const result = yield call(loadHashtagPostsAPI, action.lastId);
+    const result = yield call(loadHashtagPostsAPI, action.data, action.lastId);
     yield put({
       type: LOAD_HASHTAG_POSTS_SUCCESS,
       data: result.data,
