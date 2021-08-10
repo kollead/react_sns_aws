@@ -1,4 +1,5 @@
 const express = require('express');
+const { Post, Image, Comment, User, Hashtag } = require('../models');
 const router = express.Router();
 
 router.get('/:hashtag', async(req, res, next) => { //GET /user/1/posts
@@ -12,9 +13,11 @@ router.get('/:hashtag', async(req, res, next) => { //GET /user/1/posts
       limit: 10,
       order: [
         ['createdAt', 'DESC'],
-        [Comment, 'createdAt', 'DESC'],
       ],
       include: [{
+        model: Hashtag,
+        where: {name: req.params.hashtag}
+      },{
         model: User,
         attributes: ['id', 'nickname'],
       }, {
