@@ -26,7 +26,7 @@ const Post = () => {
         <meta name="description" content={singlePost.content} />
         <meta name="og:title" content={`${singlePost.User.nickname}님의 게시글`} />
         <meta name="og:description" content={singlePost.content} />
-        <meta name="og:image" content={singlePost.Images[0] ? singlePost.Images[0].src : `http://nodebird.com/favicon.ico`} />
+        <meta name="og:image" content={singlePost.Images[0] ? singlePost.Images[0].src : 'http://nodebird.com/favicon.ico'} />
         <meta name="og:url" content={`https://nodebird.com/pot.${id}`} />
       </Head>
       <PostCard post={singlePost} />

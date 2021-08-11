@@ -1,7 +1,7 @@
 // user/[id].js
-import React from 'react';
+import React, {useEffect} from 'react';
 import { END } from 'redux-saga';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Head from 'next/head';
@@ -14,9 +14,31 @@ import PostCard from '../../component/PostCard';
 
 const Post = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const {id} = router.query;
-  const {mainPosts} = useSelector((state) => state.post);
-  const {userInfo, user} = useSelector((state) => state.user); 
+  const {mainPosts, hasMorePost, loadPostsLoading} = useSelector((state) => state.post);
+  const {userInfo, user} = useSelector((state) => state.user);
+
+  useEffect(() => {
+    function onScroll() {
+      if (window.pageYOffset + document.documentElement.clientHeight
+        > document.documentElement.scrollHeight - 300) {
+        if (hasMorePost && !loadPostsLoading) {
+          const lastId = mainPosts[mainPosts.length - 1]?.id;
+          console.log('lastId: ', lastId);
+          dispatch({
+            type: LOAD_USER_POSTS_REQUEST,
+            lastId,
+            data: id,
+          });
+        }
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [hasMorePost, loadPostsLoading, id, mainPosts]);
 
   return (
     <AppLayout>
@@ -47,7 +69,7 @@ const Post = () => {
           </Card>
         )
         : null };
-      {mainPosts.mainPosts((p) => (
+      {mainPosts.map((p) => (
         <PostCard key={p.id} post={p} />
       ))}
     </AppLayout>
