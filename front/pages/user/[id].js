@@ -12,7 +12,7 @@ import { LOAD_USER_POSTS_REQUEST } from '../../reducers/post';
 import AppLayout from '../../component/AppLayout';
 import PostCard from '../../component/PostCard';
 
-const Post = () => {
+const User = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {id} = router.query;
@@ -47,9 +47,9 @@ const Post = () => {
           {userInfo.nickname}
           님의 글
         </title>
-        <meta name="description" content={`${userInfo.User.nickname}님의 게시글`} />
-        <meta name="og:title" content={`${userInfo.User.nickname}님의 게시글`} />
-        <meta name="og:description" content={`${userInfo.User.nickname}님의 게시글`} />
+        <meta name="description" content={`${userInfo.nickname}님의 게시글`} />
+        <meta name="og:title" content={`${userInfo.nickname}님의 게시글`} />
+        <meta name="og:description" content={`${userInfo.nickname}님의 게시글`} />
         <meta name="og:image" content="http://nodebird.com/favicon.ico" />
         <meta name="og:url" content={`https://nodebird.com/pot.${id}`} />
       </Head>
@@ -57,14 +57,14 @@ const Post = () => {
         ? (
           <Card
             actions={[
-              <div key="twit">Twit<br />{user.Posts.length}</div>,
-              <div key="followings">Following<br />{user.Following.length}</div>,
-              <div key="followers">Follower<br />{user.Follower.length}</div>,
+              <div key="twit">Twit<br />{userInfo.Posts.length}</div>,
+              <div key="followings">Following<br />{userInfo.Following.length}</div>,
+              <div key="followers">Follower<br />{userInfo.Follower.length}</div>,
             ]}
           >
             <Card.Meta
-              title={user.nickname}
-              avatar={<Avatar>{user.nickname[0]}</Avatar>}
+              title={userInfo.nickname}
+              avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
             />
           </Card>
         )
@@ -95,6 +95,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   });
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
+  return {props: {}};
 });
 
-export default Post;
+export default User;
