@@ -4,6 +4,8 @@ import Head from 'next/head';
 import axios from 'axios';
 import { END } from 'redux-saga';
 import Router from 'next/router';
+import useSWR from 'swr';
+
 import wrapper from '../store/configureStore';
 import AppLayout from '../component/AppLayout';
 import NickNameEditForm from '../component/NickNameEditForm';
@@ -13,6 +15,7 @@ import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_MY_INFO_REQUEST } 
 const Profile = () => {
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.user);
+  const {data, error} = useSWR('http://localhost:3065/user/followers');
 
   useEffect(() => {
     if (!(user && user.id)) {
