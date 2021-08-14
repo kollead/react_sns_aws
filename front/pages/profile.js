@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Head from 'next/head';
 import axios from 'axios';
@@ -17,8 +17,11 @@ const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result) =
 const Profile = () => {
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.user);
-  const {data: followersData, error: followerError} = useSWR('http://localhost:3065/user/followers', fetcher);
-  const {data: followingsData, error: followingError} = useSWR('http://localhost:3065/user/followings', fetcher);
+  const [followerLimit, setFollowerLimit] = useState(3);
+  const [followingLimit, setFollowingLimit] = useState(3);
+
+  const {data: followersData, error: followerError} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
+  const {data: followingsData, error: followingError} = useSWR(`http://localhost:3065/user/followings${followingLimit}`, fetcher);
 
   useEffect(() => {
     if (!(user && user.id)) {
@@ -34,6 +37,19 @@ const Profile = () => {
       type: LOAD_FOLLOWINGS_REQUEST,
     });
   }, []);
+
+  const loadMoreFollowing = useCallback(
+    () => {
+      setFollowingLimit((prev) => prev + 3);
+    },
+    [],
+  );
+  const loadMoreFollower = useCallback(
+    () => {
+      setFollowerLimit((prev) => prev + 3);
+    },
+    [],
+  );
 
   if (!user) {
     return '내 정보 로딩 중...';
@@ -51,8 +67,8 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NickNameEditForm />
-        <FollowList header="Following" data={followingsData} />
-        <FollowList header="Follower" data={followersData} />
+        <FollowList header="Following" data={followingsData} onClickMore={loadMoreFollowing} loading={!followingsData && !followingError} />
+        <FollowList header="Follower" data={followersData} onClickMore={loadMoreFollower} loading={!followersData && !followerError} />
       </AppLayout>
     </>
   );

@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import {stopOutLined} from '@ant-design/icons';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
-function FollowList({header, data}) {
+function FollowList({header, data, onClickMore, loading}) {
   const dispatch = useDispatch();
-  const onCancle = (id) => () => {
+  const onCancel = (id) => () => {
     if (header === 'Following') {
       dispatch({
         type: UNFOLLOW_REQUEST,
@@ -25,13 +25,17 @@ function FollowList({header, data}) {
       grid={{gutter: 4, xs: 2, md: 3}}
       size="small"
       header={<div>{header}</div>}
-      loadMore={<div style={{textAlign: 'center', margin: '10px 0'}}><Button>Load More</Button></div>}
+      loadMore={(
+        <div style={{textAlign: 'center', margin: '10px 0'}}>
+          <Button onClick={onClickMore} loading={loading}>Load More</Button>
+        </div>
+      )}
       bordered
       dataSource={data}
       renderItem={(item) => (
         <List.Item style={{marginTop: 20}}>
           <Card actions={[
-            <stopOutLined key="stop" onClick={onCancle(item.id)} />]}
+            <stopOutLined key="stop" onClick={onCancel(item.id)} />]}
           >
             <Card.Meta description={item.nickname} />
           </Card>
@@ -44,6 +48,8 @@ function FollowList({header, data}) {
 FollowList.propTypes = {
   header: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  onClickMore: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default FollowList;

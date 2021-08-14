@@ -153,7 +153,7 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
     console.log("팔로워 들어옴");
     const user = await User.findOne({where: {id: req.user.id}});
     const followers = await user.getFollower({
-      limit: req.query.limit,
+      limit: parseInt(req.query.limit),
     });
     res.status(200).json(followers);
   } catch (error) {
@@ -167,7 +167,7 @@ router.get('/followings', isLoggedIn, async (req, res, next) => {
     console.log("팔로윙 들어옴");
     const user = await User.findOne({where: {id: req.user.id}});
     const followings = await user.getFollowing({
-      limit: req.query.limit,
+      limit: parseInt(req.query.limit),
     });
     res.status(200).json(followings);
   } catch (error) {
