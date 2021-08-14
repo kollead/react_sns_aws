@@ -12,10 +12,13 @@ import NickNameEditForm from '../component/NickNameEditForm';
 import FollowList from '../component/FollowList';
 import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
+const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result) => result.data);
+
 const Profile = () => {
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.user);
-  const {data, error} = useSWR('http://localhost:3065/user/followers');
+  const {data: followersData, error: followerError} = useSWR('http://localhost:3065/user/followers', fetcher);
+  const {data: followingsData, error: followingError} = useSWR('http://localhost:3065/user/followings', fetcher);
 
   useEffect(() => {
     if (!(user && user.id)) {
@@ -33,7 +36,12 @@ const Profile = () => {
   }, []);
 
   if (!user) {
-    return null;
+    return '내 정보 로딩 중...';
+  }
+
+  if (followerError || followingError) {
+    console.error(followerError || followingError);
+    return '팔로윙||팔로워 로딩 중 에러가 발생합니다';
   }
 
   return (
@@ -43,8 +51,8 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NickNameEditForm />
-        <FollowList header="Following" data={user.Following} />
-        <FollowList header="Follower" data={user.Follower} />
+        <FollowList header="Following" data={followingsData} />
+        <FollowList header="Follower" data={followersData} />
       </AppLayout>
     </>
   );

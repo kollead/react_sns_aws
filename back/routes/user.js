@@ -40,8 +40,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-
-
 router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
@@ -154,7 +152,9 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
   try {
     console.log("팔로워 들어옴");
     const user = await User.findOne({where: {id: req.user.id}});
-    const followers = await user.getFollower();
+    const followers = await user.getFollower({
+      limit: req.query.limit,
+    });
     res.status(200).json(followers);
   } catch (error) {
     console.error(error);
@@ -166,7 +166,9 @@ router.get('/followings', isLoggedIn, async (req, res, next) => {
   try {
     console.log("팔로윙 들어옴");
     const user = await User.findOne({where: {id: req.user.id}});
-    const followings = await user.getFollowing();
+    const followings = await user.getFollowing({
+      limit: req.query.limit,
+    });
     res.status(200).json(followings);
   } catch (error) {
     console.error(error);
@@ -187,7 +189,6 @@ router.delete('/follower/:userId', isLoggedIn, async (req, res, next) => {
     next(error)
   }
 });
-
 
 router.get('/:userId', async (req, res, next) => { // GET /user/1
   try {
@@ -225,7 +226,6 @@ router.get('/:userId', async (req, res, next) => { // GET /user/1
     next(error);
   }
 });
-
 
 router.get('/:userId/posts', async(req, res, next) => { //GET /user/1/posts
   try {
@@ -272,6 +272,5 @@ router.get('/:userId/posts', async(req, res, next) => { //GET /user/1/posts
      next(error); 
   }    
 });
-
 
 module.exports = router;
