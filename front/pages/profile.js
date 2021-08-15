@@ -15,13 +15,13 @@ import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_MY_INFO_REQUEST } 
 const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result) => result.data);
 
 const Profile = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const {user} = useSelector((state) => state.user);
   const [followerLimit, setFollowerLimit] = useState(3);
   const [followingLimit, setFollowingLimit] = useState(3);
 
-  const {data: followersData, error: followerError} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
-  const {data: followingsData, error: followingError} = useSWR(`http://localhost:3065/user/followings${followingLimit}`, fetcher);
+  const {data: followersData = [], error: followerError} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
+  const {data: followingsData = [], error: followingError} = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
 
   useEffect(() => {
     if (!(user && user.id)) {
@@ -29,14 +29,14 @@ const Profile = () => {
     }
   }, [user && user.id]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     dispatch({
       type: LOAD_FOLLOWERS_REQUEST,
     });
     dispatch({
       type: LOAD_FOLLOWINGS_REQUEST,
     });
-  }, []);
+  }, []); */
 
   const loadMoreFollowing = useCallback(
     () => {

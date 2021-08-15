@@ -1,11 +1,18 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import axios from 'axios';
+import useSWR from 'swr';
 import {List, Button, Card} from 'antd';
 import PropTypes from 'prop-types';
-import {stopOutLined} from '@ant-design/icons';
+import { StopOutlined } from '@ant-design/icons';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
+const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result) => result.data);
+
 function FollowList({header, data, onClickMore, loading}) {
+  const {data: followersData, error: followerError, mutate: mutateFollower} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
+  const {data: followingsData, error: followingError, mutate: mutateFollowing} = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
+
   const dispatch = useDispatch();
   const onCancel = (id) => () => {
     if (header === 'Following') {
@@ -13,12 +20,16 @@ function FollowList({header, data, onClickMore, loading}) {
         type: UNFOLLOW_REQUEST,
         data: id,
       });
+      
+
+    } else {
+      dispatch({
+        type: REMOVE_FOLLOWER_REQUEST,
+        data: id,
+      });
     }
-    dispatch({
-      type: REMOVE_FOLLOWER_REQUEST,
-      data: id,
-    });
   };
+
   return (
     <List
       style={{marginBottom: 20}}
@@ -35,7 +46,7 @@ function FollowList({header, data, onClickMore, loading}) {
       renderItem={(item) => (
         <List.Item style={{marginTop: 20}}>
           <Card actions={[
-            <stopOutLined key="stop" onClick={onCancel(item.id)} />]}
+            <StopOutlined key="stop" onClick={onCancel(item.id)} />]}
           >
             <Card.Meta description={item.nickname} />
           </Card>
