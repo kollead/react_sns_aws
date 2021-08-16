@@ -1,18 +1,13 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
-import useSWR from 'swr';
+import useSWR, {mutate} from 'swr';
 import {List, Button, Card} from 'antd';
 import PropTypes from 'prop-types';
 import { StopOutlined } from '@ant-design/icons';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
-const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result) => result.data);
-
 function FollowList({header, data, onClickMore, loading}) {
-  const {data: followersData, error: followerError, mutate: mutateFollower} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
-  const {data: followingsData, error: followingError, mutate: mutateFollowing} = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
-
   const dispatch = useDispatch();
   const onCancel = (id) => () => {
     if (header === 'Following') {
@@ -20,8 +15,6 @@ function FollowList({header, data, onClickMore, loading}) {
         type: UNFOLLOW_REQUEST,
         data: id,
       });
-      
-
     } else {
       dispatch({
         type: REMOVE_FOLLOWER_REQUEST,
