@@ -1,13 +1,13 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
-import useSWR, {mutate} from 'swr';
+// import useSWR, {mutate} from 'swr';
 import {List, Button, Card} from 'antd';
 import PropTypes from 'prop-types';
 import { StopOutlined } from '@ant-design/icons';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
-function FollowList({header, data, onClickMore, loading}) {
+function FollowList({header, followData, limit, mutate, onClickMore, loading}) {
   const dispatch = useDispatch();
   const onCancel = (id) => () => {
     if (header === 'Following') {
@@ -15,11 +15,13 @@ function FollowList({header, data, onClickMore, loading}) {
         type: UNFOLLOW_REQUEST,
         data: id,
       });
+      mutate((prev) => prev.filter((d) => d.id !== id));
     } else {
       dispatch({
         type: REMOVE_FOLLOWER_REQUEST,
         data: id,
       });
+      mutate((prev) => prev.filter((d) => d.id !== id));
     }
   };
 
@@ -35,7 +37,7 @@ function FollowList({header, data, onClickMore, loading}) {
         </div>
       )}
       bordered
-      dataSource={data}
+      dataSource={followData}
       renderItem={(item) => (
         <List.Item style={{marginTop: 20}}>
           <Card actions={[
@@ -51,9 +53,11 @@ function FollowList({header, data, onClickMore, loading}) {
 
 FollowList.propTypes = {
   header: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
+  followData: PropTypes.array.isRequired,
   onClickMore: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  limit: PropTypes.number.isRequired,
+  mutate: PropTypes.any.isRequired,
 };
 
 export default FollowList;

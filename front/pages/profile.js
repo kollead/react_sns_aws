@@ -20,8 +20,8 @@ const Profile = () => {
   const [followerLimit, setFollowerLimit] = useState(3);
   const [followingLimit, setFollowingLimit] = useState(3);
 
-  const {data: followersData = [], error: followerError} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
-  const {data: followingsData = [], error: followingError} = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
+  const {data: followersData = [], error: followerError, mutate: mutateFollower} = useSWR(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
+  const {data: followingsData = [], error: followingError, mutate: mutateFollowing} = useSWR(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
 
   useEffect(() => {
     if (!(user && user.id)) {
@@ -67,8 +67,8 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NickNameEditForm />
-        <FollowList header="Following" data={followingsData} onClickMore={loadMoreFollowing} loading={!followingsData && !followingError} />
-        <FollowList header="Follower" data={followersData} onClickMore={loadMoreFollower} loading={!followersData && !followerError} />
+        <FollowList header="Following" followData={followingsData} mutate={mutateFollowing} onClickMore={loadMoreFollowing} limit={followingLimit} loading={!followingsData && !followingError} />
+        <FollowList header="Follower" followData={followersData} mutate={mutateFollower} onClickMore={loadMoreFollower} limit={followerLimit} loading={!followersData && !followerError} />
       </AppLayout>
     </>
   );
