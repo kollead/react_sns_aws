@@ -215,7 +215,7 @@ router.get('/:userId', async (req, res, next) => { // GET /user/1
       data.Posts = data.Posts.length;
       data.Follower = data.Follower.length;
       data.Following = data.Following.length;
-      console.log("UserInfo: ", data);
+      console.log("userInfo: ", data);
       res.status(200).json(data);
     } else {
       res.status(404).json('존재하지 않는 사용자입니다.');

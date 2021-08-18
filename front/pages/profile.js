@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import axios from 'axios';
 import { END } from 'redux-saga';
@@ -10,7 +10,7 @@ import wrapper from '../store/configureStore';
 import AppLayout from '../component/AppLayout';
 import NickNameEditForm from '../component/NickNameEditForm';
 import FollowList from '../component/FollowList';
-import {LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_MY_INFO_REQUEST } from '../reducers/user';
+import {LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result) => result.data);
 
