@@ -141,7 +141,7 @@ function PostCard({post}) {
                 <Comment
                   author={item.User.nickname}
                   avatar={(
-                    <Link href={`/user/${item.User.id}`}>
+                    <Link href={`/user/${item.User}`}>
                       <a><Avatar>{item.User.nickname[0]}</Avatar></a>
                     </Link>
                     )}

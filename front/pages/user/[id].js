@@ -4,6 +4,7 @@ import { END } from 'redux-saga';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Link from 'next/link'
 import Head from 'next/head';
 import { Card, Avatar } from 'antd';
 import wrapper from '../../store/configureStore';
@@ -17,7 +18,7 @@ const User = () => {
   const dispatch = useDispatch();
   const {id} = router.query;
   const {mainPosts, hasMorePost, loadPostsLoading} = useSelector((state) => state.post);
-  const {userInfo, user} = useSelector((state) => state.user);
+  const {userInfo} = useSelector((state) => state.user);
 
   useEffect(() => {
     function onScroll() {
@@ -38,10 +39,11 @@ const User = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, [hasMorePost, loadPostsLoading, id, mainPosts]);
+  }, [hasMorePost, id, mainPosts.length]);
 
   return (
     <AppLayout>
+      {userInfo && (
       <Head>
         <title>
           {userInfo.nickname}
@@ -53,18 +55,23 @@ const User = () => {
         <meta name="og:image" content="http://nodebird.com/favicon.ico" />
         <meta name="og:url" content={`https://nodebird.com/pot.${id}`} />
       </Head>
+      )}
       {userInfo
         ? (
           <Card
             actions={[
-              <div key="twit">Twit<br />{userInfo.Posts.length}</div>,
-              <div key="followings">Following<br />{userInfo.Following.length}</div>,
-              <div key="followers">Follower<br />{userInfo.Follower.length}</div>,
+              <div key="twit">Twit<br />{userInfo.Posts}</div>,
+              <div key="followings">Following<br />{userInfo.Following}</div>,
+              <div key="followers">Follower<br />{userInfo.Follower}</div>,
             ]}
           >
             <Card.Meta
               title={userInfo.nickname}
-              avatar={<Avatar>{userInfo.nickname[0]}</Avatar>}
+              avatar={(
+                <Link href={`/user/${userInfo.id}`}>
+                  <a><Avatar>{userInfo.nickname[0]}</Avatar></a>
+                </Link>
+              )}
             />
           </Card>
         )
@@ -95,6 +102,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   });
   context.store.dispatch(END);
   await context.store.sagaTask.toPromise();
+  console.log('getState', context.store.getState().post.mainPosts);
   return {props: {}};
 });
 

@@ -212,9 +212,11 @@ router.get('/:userId', async (req, res, next) => { // GET /user/1
     });
     if (fullUserWithoutPassword) {
       const data = fullUserWithoutPassword.toJSON();
+      data.nickname= fullUserWithoutPassword.nickname;
       data.Posts = data.Posts.length;
       data.Follower = data.Follower.length;
       data.Following = data.Following.length;
+      console.log("/:userId 들어옴");
       console.log("userInfo: ", data);
       res.status(200).json(data);
     } else {
