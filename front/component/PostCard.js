@@ -103,7 +103,7 @@ function PostCard({post}) {
         title={post.RetweetId ? `${post.User.nickname} 님이 리트윗 하셨습니다.` : null}
         extra={id && <FollowButton post={post} />}
       >
-        {post.RetweetId && post.RetweetId
+        {post.RetweetId && post.Retweet
           ? (
             <Card
               cover={post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}
@@ -114,6 +114,8 @@ function PostCard({post}) {
                     <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
                   </Link>
                 )}
+                title={post.Retweet.User.nickname}
+                description={<PostCardContent postData={post.Retweet.content} />}
               />
             </Card>
           )

@@ -39,7 +39,7 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
         UserId: req.user.id,
       });
     if(hashtags) {
-      const result = await Promise.all(hashtags.map((tag) => Hashtag.findOrcreate({
+      const result = await Promise.all(hashtags.map((tag) => Hashtag.findOrCreate({
         where: {name: tag.slice(1).toLowerCase()},
       }))); // [[hashtag1, true], [hashtag2. true]]
       await post.addHashtags(result.map((v) => v[0]));
@@ -217,6 +217,7 @@ router.post('/:postId/retweet', isLoggedIn, async (req, res, next) => {
         }]
       }]
     })
+    console.log("retweetWithPrevPost: ", retweetWithPrevPost);
     res.status(201).json(retweetWithPrevPost);
   } catch (error) {
     console.error(error);
