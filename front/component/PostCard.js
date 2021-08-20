@@ -12,6 +12,9 @@ import PostCardContent from './PostCardContent';
 import FollowButton from './FollowButton';
 import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
 
+const relativeTime = require('dayjs/plugin/relativeTime');
+
+dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
 function PostCard({post}) {
@@ -75,6 +78,7 @@ function PostCard({post}) {
     }, [id],
   );
   const liked = post.Likers.find((v) => v.id === id);
+  const now = dayjs();
 
   return (
     <div style={{marginBottom: 10}}>
@@ -112,7 +116,11 @@ function PostCard({post}) {
             <Card
               cover={post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}
             >
-              <div style={{float: 'right'}}>{dayjs(post.createdAt).format('YYYY.MM.DD')}</div>
+              <div style={{float: 'right'}}>
+                {dayjs(post.createdAt).diff(now, 'day') >= 2
+                  ? dayjs(post.createdAt).format('YYYY.MM.DD')
+                  : dayjs(post.createdAt).fromNow()}
+              </div>
               <Card.Meta
                 avatar={(
                   <Link href={`/user/${post.Retweet.User.id}`}>
@@ -126,7 +134,11 @@ function PostCard({post}) {
           )
           : (
             <>
-              <div style={{float: 'right'}}>{dayjs(post.createdAt).format('YYYY.MM.DD')}</div>
+              <div style={{float: 'right'}}>
+                {dayjs(post.createdAt).diff(now, 'day') >= 2
+                  ? dayjs(post.createdAt).format('YYYY.MM.DD')
+                  : dayjs(post.createdAt).fromNow()}
+              </div>
               <Card.Meta
                 avatar={(
                   <Link href={`/user/${post.User.id}`}>
@@ -148,7 +160,11 @@ function PostCard({post}) {
             dataSource={post.Comments}
             renderItem={(item) => (
               <li>
-                <div style={{float: 'right'}}>{dayjs(item.createdAt).format('YYYY.MM.DD')}</div>
+                <div style={{float: 'right'}}>
+                  {dayjs(post.createdAt).diff(now, 'day') >= 2
+                    ? dayjs(post.createdAt).format('YYYY.MM.DD')
+                    : dayjs(post.createdAt).fromNow()}
+                </div>
                 <Comment
                   author={item.User.nickname}
                   avatar={(

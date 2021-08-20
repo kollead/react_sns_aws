@@ -1,13 +1,13 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 // import useSWR, {mutate} from 'swr';
 import {List, Button, Card} from 'antd';
 import PropTypes from 'prop-types';
 import { StopOutlined } from '@ant-design/icons';
 import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
-function FollowList({header, followData, limit, mutate, onClickMore, loading}) {
+function FollowList({header, followData, mutate, onClickMore, loading}) {
   const dispatch = useDispatch();
   const onCancel = (id) => () => {
     if (header === 'Following') {
@@ -56,7 +56,6 @@ FollowList.propTypes = {
   followData: PropTypes.array.isRequired,
   onClickMore: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  limit: PropTypes.number.isRequired,
   mutate: PropTypes.any.isRequired,
 };
 

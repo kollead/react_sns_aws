@@ -67,8 +67,8 @@ const Profile = () => {
       </Head>
       <AppLayout>
         <NickNameEditForm />
-        <FollowList header="Following" followData={followingsData} mutate={mutateFollowing} onClickMore={loadMoreFollowing} limit={followingLimit} loading={!followingsData && !followingError} />
-        <FollowList header="Follower" followData={followersData} mutate={mutateFollower} onClickMore={loadMoreFollower} limit={followerLimit} loading={!followersData && !followerError} />
+        <FollowList header="Following" followData={followingsData} mutate={mutateFollowing} onClickMore={loadMoreFollowing} loading={!followingsData && !followingError} />
+        <FollowList header="Follower" followData={followersData} mutate={mutateFollower} onClickMore={loadMoreFollower} loading={!followersData && !followerError} />
       </AppLayout>
     </>
   );
