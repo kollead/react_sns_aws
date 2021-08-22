@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/infiniteIndex": [
+    "/about": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/infiniteIndex.js"
+      "static/chunks/pages/about.js"
     ]
   },
   "ampFirstPages": []
