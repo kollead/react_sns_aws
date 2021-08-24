@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build": "ANALYZE=true NODE_ENV=production next build"
+    "build": "cross-env ANALYZE=true NODE_ENV=production next build"
   },
   "author": "Sue B",
   "license": "ISC",
@@ -15,8 +15,8 @@
     "antd": "^4.15.2",
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.13.2",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.10.6",
-    "faker": "^5.5.3",
     "immer": "^9.0.2",
     "moment": "^2.29.1",
     "next": "^9.5.5",

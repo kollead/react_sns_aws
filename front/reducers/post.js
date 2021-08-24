@@ -1,6 +1,4 @@
-import shortid from 'shortid';
-import produce from 'immer';
-import faker from 'faker';
+import produce from '../util/produce';
 
 export const initialState = {
   mainPosts: [],
@@ -35,25 +33,6 @@ export const initialState = {
   retweetDone: false,
   retweetError: null,
 };
-
-export const generateDummyPost = (number) => Array(number).fill().map(() => ({
-  id: shortid.generate(),
-  User: {
-    id: shortid.generate(),
-    nickname: faker.name.findName(),
-  },
-  content: faker.lorem.paragraph(),
-  Images: [{
-    src: faker.image.image(),
-  }],
-  Comments: [{
-    User: {
-      id: shortid.generate(),
-      nickname: faker.name.findName(),
-    },
-    content: faker.lorem.sentence(),
-  }],
-}));
 
 export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
 export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';

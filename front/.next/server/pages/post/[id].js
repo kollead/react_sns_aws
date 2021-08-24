@@ -473,13 +473,6 @@ module.exports = _interopRequireWildcard;
 
 /***/ }),
 
-/***/ "2WPw":
-/***/ (function(module, exports) {
-
-module.exports = require("shortid");
-
-/***/ }),
-
 /***/ "3WeD":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1804,13 +1797,6 @@ const getServerSideProps = _store_configureStore__WEBPACK_IMPORTED_MODULE_6__[/*
   await context.store.sagaTask.toPromise();
 });
 /* harmony default export */ __webpack_exports__["default"] = (Post);
-
-/***/ }),
-
-/***/ "MCK1":
-/***/ (function(module, exports) {
-
-module.exports = require("faker");
 
 /***/ }),
 
@@ -4247,7 +4233,6 @@ module.exports = require("@ant-design/icons");
 
 "use strict";
 /* unused harmony export initialState */
-/* unused harmony export generateDummyPost */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return LIKE_POST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return LIKE_POST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return LIKE_POST_FAILURE; });
@@ -4285,14 +4270,8 @@ module.exports = require("@ant-design/icons");
 /* unused harmony export addPost */
 /* unused harmony export addComment */
 /* unused harmony export removePost */
-/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2WPw");
-/* harmony import */ var shortid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(shortid__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("T5ka");
-/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(immer__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("MCK1");
-/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(faker__WEBPACK_IMPORTED_MODULE_2__);
-
-
+/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("T5ka");
+/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(immer__WEBPACK_IMPORTED_MODULE_0__);
 
 const initialState = {
   mainPosts: [],
@@ -4327,24 +4306,6 @@ const initialState = {
   retweetDone: false,
   retweetError: null
 };
-const generateDummyPost = number => Array(number).fill().map(() => ({
-  id: shortid__WEBPACK_IMPORTED_MODULE_0___default.a.generate(),
-  User: {
-    id: shortid__WEBPACK_IMPORTED_MODULE_0___default.a.generate(),
-    nickname: faker__WEBPACK_IMPORTED_MODULE_2___default.a.name.findName()
-  },
-  content: faker__WEBPACK_IMPORTED_MODULE_2___default.a.lorem.paragraph(),
-  Images: [{
-    src: faker__WEBPACK_IMPORTED_MODULE_2___default.a.image.image()
-  }],
-  Comments: [{
-    User: {
-      id: shortid__WEBPACK_IMPORTED_MODULE_0___default.a.generate(),
-      nickname: faker__WEBPACK_IMPORTED_MODULE_2___default.a.name.findName()
-    },
-    content: faker__WEBPACK_IMPORTED_MODULE_2___default.a.lorem.sentence()
-  }]
-}));
 const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
 const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
 const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE';
@@ -4392,7 +4353,7 @@ const removePost = data => ({
   data
 });
 
-const reducer = (state = initialState, action) => immer__WEBPACK_IMPORTED_MODULE_1___default()(state, draft => {
+const reducer = (state = initialState, action) => immer__WEBPACK_IMPORTED_MODULE_0___default()(state, draft => {
   switch (action.type) {
     case LOAD_USER_POSTS_REQUEST:
     case LOAD_HASHTAG_POSTS_REQUEST:
