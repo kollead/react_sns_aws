@@ -18,7 +18,7 @@ const User = () => {
   const dispatch = useDispatch();
   const {id} = router.query;
   const {mainPosts, hasMorePost, loadPostsLoading} = useSelector((state) => state.post);
-  const {userInfo} = useSelector((state) => state.user);
+  const {userInfo, user} = useSelector((state) => state.user);
 
   useEffect(() => {
     function onScroll() {
@@ -56,9 +56,10 @@ const User = () => {
         <meta name="og:url" content={`https://nodebird.com/pot.${id}`} />
       </Head>
       )}
-      {userInfo
+      {userInfo && userInfo.id !== user?.id
         ? (
           <Card
+            style={{marginBottom: 20}}
             actions={[
               <div key="twit">Twit<br />{userInfo.Posts}</div>,
               <div key="followings">Following<br />{userInfo.Following}</div>,

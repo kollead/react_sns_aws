@@ -1,15 +1,21 @@
-module.exports = (sequelize, DataTypes) => {
-    const Hashtag = sequelize.define('Hashtag', {
+const DataTypes = require('sequelize');
+const {Model} = DataTypes;
+
+module.exports = class Hashtag extends Model {
+  static init(sequelize) {
+    return super.init({
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
-      }
-    },{
+      },
+    }, {
+      modelName: 'Hashtag',
       charset: 'utf8mb4',
       collate: 'utf8mb4_general_ci',
+      sequelize,
     });
-    Hashtag.associate = (db) => {
-      db.Hashtag.belongsToMany(db.Post, {through: 'PostHashtag'});
-    };
-    return Hashtag;
   }
+  static associate(db) {
+    db.Hashtag.belongsToMany(db.Post, {through: 'PostHashtag'});
+  }
+};

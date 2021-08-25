@@ -14,6 +14,9 @@ export const initialState = {
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
+  modifyPostLoading: false,
+  modifyPostDone: false,
+  modifyPostError: null,
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
@@ -69,6 +72,10 @@ export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
+
+export const MODIFY_POST_REQUEST = 'MODIFY_POST_REQUEST';
+export const MODIFY_POST_SUCCESS = 'MODIFY_POST_SUCCESS';
+export const MODIFY_POST_FAILURE = 'MODIFY_POST_FAILURE';
 
 export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
@@ -182,6 +189,20 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case REMOVE_POST_FAILURE:
       draft.removePostLoading = false;
       draft.removePostError = action.error;
+      break;
+    case MODIFY_POST_REQUEST:
+      draft.modifyPostLoading = true;
+      draft.modifyPostDone = false;
+      draft.modifyPostError = null;
+      break;
+    case MODIFY_POST_SUCCESS:
+      draft.modifyPostLoading = false;
+      draft.modifyPostDone = true;
+      draft.mainPosts.find((v) => v.id === action.data.postId).content = action.data.content;
+      break;
+    case MODIFY_POST_FAILURE:
+      draft.modifyPostLoading = false;
+      draft.modifyPostError = action.error;
       break;
     case LIKE_POST_REQUEST:
       draft.likePostsLoading = true;

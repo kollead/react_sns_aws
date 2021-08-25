@@ -97,7 +97,7 @@ function PostCard({post}) {
                 {id && post.User.id === id
                   ? (
                     <>
-                      <Button>Modify</Button>
+                      {!post.RetweetId && <Button>Modify</Button>}
                       <Button type="danger" loading={removePostLoading} onClick={onRemovePost}>Remove</Button>
                     </>
                   )
