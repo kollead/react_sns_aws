@@ -261,4 +261,22 @@ router.get('/:postId', async (req, res, next) => {
   }
 });
 
+router.patch(':/postId',isLoggedIn, async(req, res, next) => {
+  try {
+    await Post.update({
+      content: req.body.content
+    }, {
+      where: {
+        id: req.params.postId,
+        UserId: req.user.id,
+      },
+
+    });
+    res.status(200).json({PostId: parseInt(req.params.postId, 10), content: req.body.content});
+  } catch (error) {
+    console.error(error);
+    next(error)
+  }
+});
+
 module.exports = router;

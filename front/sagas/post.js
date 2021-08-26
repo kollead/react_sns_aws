@@ -44,6 +44,9 @@ function uploadImagesAPI(data) {
 function retweetAPI(data) {
   return axios.post(`/post/${data}/retweet`);
 }
+function modifyPostAPI(data) {
+  return axios.patch(`post/${data.id}`, data);
+}
 
 function* addPost(action) {
   try {
