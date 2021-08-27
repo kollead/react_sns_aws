@@ -3,18 +3,13 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import {Button, Input} from 'antd';
 import { useSelector} from 'react-redux';
+import useInput from '../hooks/useInput';
 
 const {TextArea} = Input;
 
 function PostCardContent({postData, editMode, onModifyPost, onClickModify}) {
   const { modifyPostLoading, modifyPostDone } = useSelector((state) => state.post);
-  const [editText, setEditText] = useState(postData);
-  const onChangeText = useCallback(
-    (e) => {
-      setEditText(e.target.value);
-    },
-    [editText],
-  );
+  const [editText, onChangeText, setEditText] = useInput(postData);
   useEffect(() => {
     if (modifyPostDone) {
       onClickModify();
@@ -26,9 +21,9 @@ function PostCardContent({postData, editMode, onModifyPost, onClickModify}) {
       {editMode
         ? (
           <>
-            <TextArea value={postData} onChange={onChangeText} />
+            <TextArea value={editText} onChange={onChangeText} />
             <Button.Group>
-              <Button loading={modifyPostLoading} onClick={onModifyPost(editText )}>수정</Button>
+              <Button loading={modifyPostLoading} onClick={onModifyPost(editText)}>수정</Button>
               <Button type="danger" onClick={onClickModify}>수정 취소</Button>
             </Button.Group>
           </>

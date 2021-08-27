@@ -261,7 +261,7 @@ router.get('/:postId', async (req, res, next) => {
   }
 });
 
-router.patch(':/postId',isLoggedIn, async(req, res, next) => {
+router.patch('/:postId',isLoggedIn, async(req, res, next) => {
   try {
     await Post.update({
       content: req.body.content

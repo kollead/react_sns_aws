@@ -81,9 +81,13 @@ function PostCard({post}) {
 
   const onClickModify = useCallback(
     () => {
+      console.log('Click Modify');
+      console.log('before setEditMode: ', editMode);
       setEditMode((prev) => !prev);
+      console.log('after setEditMode: ', editMode);
     }, [],
   );
+
   const onModifyPost = useCallback(
     (editText) => () => {
       dispatch({
@@ -151,7 +155,7 @@ function PostCard({post}) {
                 description={(
                   <PostCardContent
                     postData={post.Retweet.content}
-                    onChangePost={onModifyPost}
+                    onModifyPost={onModifyPost}
                     onClickModify={onClickModify}
                   />
                 )}
@@ -174,9 +178,9 @@ function PostCard({post}) {
                 title={post.User.nickname}
                 description={(
                   <PostCardContent
-                    editmode={editMode}
+                    editMode={editMode}
                     postData={post.content}
-                    onChangePost={onModifyPost}
+                    onModifyPost={onModifyPost}
                     onClickModify={onClickModify}
                   />
                 )}

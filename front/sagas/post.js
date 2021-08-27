@@ -45,7 +45,7 @@ function retweetAPI(data) {
   return axios.post(`/post/${data}/retweet`);
 }
 function modifyPostAPI(data) {
-  return axios.patch(`post/${data.postId}`, data);
+  return axios.patch(`/post/${data.postId}`, data);
 }
 
 function* addPost(action) {
