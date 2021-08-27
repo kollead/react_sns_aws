@@ -10,7 +10,7 @@ import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import FollowButton from './FollowButton';
-import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
+import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST, MODIFY_POST_REQUEST } from '../reducers/post';
 
 const relativeTime = require('dayjs/plugin/relativeTime');
 
@@ -22,6 +22,7 @@ function PostCard({post}) {
   const id = useSelector((state) => state.user.user?.id);
   const {removePostLoading} = useSelector((state) => state.post);
   const dispatch = useDispatch();
+  const [editMode, setEditMode] = useState(false);
 
   const onLike = useCallback(
     () => {
@@ -77,6 +78,25 @@ function PostCard({post}) {
       });
     }, [id],
   );
+
+  const onClickModify = useCallback(
+    () => {
+      setEditMode((prev) => !prev);
+    }, [],
+  );
+  const onModifyPost = useCallback(
+    (editText) => () => {
+      dispatch({
+        type: MODIFY_POST_REQUEST,
+        data: {
+          postId: post.id,
+          content: editText,
+        },
+      });
+    },
+    [post],
+  );
+
   const liked = post.Likers.find((v) => v.id === id);
   const now = dayjs();
 
@@ -97,7 +117,7 @@ function PostCard({post}) {
                 {id && post.User.id === id
                   ? (
                     <>
-                      {!post.RetweetId && <Button>Modify</Button>}
+                      {!post.RetweetId && <Button onClick={onClickModify}>Modify</Button>}
                       <Button type="danger" loading={removePostLoading} onClick={onRemovePost}>Remove</Button>
                     </>
                   )
@@ -128,7 +148,13 @@ function PostCard({post}) {
                   </Link>
                 )}
                 title={post.Retweet.User.nickname}
-                description={<PostCardContent postData={post.Retweet.content} />}
+                description={(
+                  <PostCardContent
+                    postData={post.Retweet.content}
+                    onChangePost={onModifyPost}
+                    onClickModify={onClickModify}
+                  />
+                )}
               />
             </Card>
           )
@@ -146,7 +172,14 @@ function PostCard({post}) {
                   </Link>
                   )}
                 title={post.User.nickname}
-                description={<PostCardContent postData={post.content} />}
+                description={(
+                  <PostCardContent
+                    editmode={editMode}
+                    postData={post.content}
+                    onChangePost={onModifyPost}
+                    onClickModify={onClickModify}
+                  />
+                )}
               />
             </>
           )}
