@@ -1,5 +1,7 @@
 import React, {useCallback, useRef, useEffect} from 'react';
-import { Form, Input, Button} from 'antd';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
 import {useDispatch, useSelector} from 'react-redux';
 import {addPost, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE, ADD_POST_REQUEST} from '../reducers/post';
 import useInput from '../hooks/useInput';

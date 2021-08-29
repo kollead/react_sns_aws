@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Form, Input, Button} from 'antd';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 import {ADD_COMMENT_REQUEST} from '../reducers/post';

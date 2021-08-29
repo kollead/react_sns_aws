@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { Button } from 'antd';
+import Button from 'antd/lib/button';
 import PropTypes from 'prop-types';
 import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from '../reducers/user';
 

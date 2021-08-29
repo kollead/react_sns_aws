@@ -1,7 +1,8 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import {Button, Input} from 'antd';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
 import { useSelector} from 'react-redux';
 import useInput from '../hooks/useInput';
 

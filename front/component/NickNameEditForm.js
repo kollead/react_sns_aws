@@ -1,6 +1,7 @@
 import React, {useMemo, useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Form, Input} from 'antd';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
 import useInput from '../hooks/useInput';
 import { CHANGE_NICKNAME_REQUEST } from '../reducers/user';
 

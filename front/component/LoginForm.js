@@ -1,5 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
-import {Form, Input, Button} from 'antd';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
 import Link from 'next/link';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
