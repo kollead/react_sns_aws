@@ -25,7 +25,6 @@ const upload = multer({
       const ext = path.extname(file.originalname); //확장자 추출
       const basename = path.basename(file.originalname, ext);
       done(null, basename + '_' + new Date().getTime() + ext);
-      done(null);
     },
   }),
   limits: { fileSize: 20*1024*1024 }, //20mb
@@ -46,9 +45,8 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
     }
     if(req.body.image) {
       if(Array.isArray(req.body.image)) { //images
-        const images = await Promise.all(req.body.image.map((image) => {
-          Image.create({src: image});
-        }))
+        console.log("req.body.image: ", req.body.image)
+        const images = await Promise.all(req.body.image.map((image) => Image.create({src: image})));
         await post.addImages(images)
       } else { //1 image
         const image =await Image.create({src: req.body.image});
@@ -128,7 +126,7 @@ router.delete('/:postId', isLoggedIn, async (req, res, next) => {
 });
 
 router.post('/images', isLoggedIn, upload.array('image'), async(req, res, next) => {
-  console.log(req.files);
+  console.log("images: ", req.files);
   res.json(req.files.map((v) => v.filename));
 });
 
