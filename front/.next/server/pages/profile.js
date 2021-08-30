@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -449,13 +449,6 @@ module.exports = require("redux-saga");
 
 /***/ }),
 
-/***/ "27qp":
-/***/ (function(module, exports) {
-
-module.exports = require("antd/lib/popover");
-
-/***/ }),
-
 /***/ "284h":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -593,14 +586,6 @@ function assign(target, ...searchParamsList) {
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("RNiq");
-
-
-/***/ }),
-
 /***/ "4Q3z":
 /***/ (function(module, exports) {
 
@@ -619,6 +604,14 @@ module.exports = require("antd/lib/list");
 /***/ (function(module, exports) {
 
 module.exports = require("antd/lib/card");
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("W+IF");
+
 
 /***/ }),
 
@@ -1436,13 +1429,6 @@ module.exports = require("react/jsx-runtime");
 
 /***/ }),
 
-/***/ "GOli":
-/***/ (function(module, exports) {
-
-module.exports = require("antd/lib/comment");
-
-/***/ }),
-
 /***/ "JMOJ":
 /***/ (function(module, exports) {
 
@@ -1791,266 +1777,10 @@ const reducer = (state = initialState, action) => Object(_util_produce__WEBPACK_
 
 /***/ }),
 
-/***/ "O/hg":
-/***/ (function(module, exports) {
-
-module.exports = require("react-slick");
-
-/***/ }),
-
 /***/ "Osoz":
 /***/ (function(module, exports) {
 
 module.exports = require("next/dist/next-server/lib/router-context.js");
-
-/***/ }),
-
-/***/ "RNiq":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "getServerSideProps", function() { return /* binding */ getServerSideProps; });
-
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__("cDcd");
-
-// EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__("zr5I");
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
-
-// EXTERNAL MODULE: external "react-redux"
-var external_react_redux_ = __webpack_require__("h74D");
-
-// EXTERNAL MODULE: external "redux-saga"
-var external_redux_saga_ = __webpack_require__("1fKG");
-
-// EXTERNAL MODULE: ./store/configureStore.js + 4 modules
-var configureStore = __webpack_require__("AQn3");
-
-// EXTERNAL MODULE: ./component/AppLayout.js + 2 modules
-var AppLayout = __webpack_require__("1Dl5");
-
-// EXTERNAL MODULE: external "antd/lib/form"
-var form_ = __webpack_require__("foLw");
-var form_default = /*#__PURE__*/__webpack_require__.n(form_);
-
-// EXTERNAL MODULE: external "antd/lib/input"
-var input_ = __webpack_require__("Uqqx");
-var input_default = /*#__PURE__*/__webpack_require__.n(input_);
-
-// EXTERNAL MODULE: external "antd/lib/button"
-var button_ = __webpack_require__("eGmO");
-var button_default = /*#__PURE__*/__webpack_require__.n(button_);
-
-// EXTERNAL MODULE: ./reducers/post.js
-var reducers_post = __webpack_require__("p+NB");
-
-// EXTERNAL MODULE: ./hooks/useInput.js
-var useInput = __webpack_require__("3zrx");
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__("F5FC");
-
-// CONCATENATED MODULE: ./component/PostForm.js
-
-
-
-
-
-
-
-
-
-
-function PostForm() {
-  const dispatch = Object(external_react_redux_["useDispatch"])();
-  const [text, onChangeText, SetText] = Object(useInput["a" /* default */])();
-  const {
-    imagePaths,
-    addPostDone
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
-  const imageInput = Object(external_react_["useRef"])();
-  Object(external_react_["useEffect"])(() => {
-    if (addPostDone) {
-      SetText('');
-    }
-  }, [addPostDone]);
-  const onSubmit = Object(external_react_["useCallback"])(() => {
-    if (!text || !text.trim()) {
-      return alert('게시글을 작성하세요');
-    }
-
-    const formData = new FormData();
-    imagePaths.forEach(p => {
-      formData.append('image', p);
-    });
-    formData.append('content', text);
-    return dispatch({
-      type: reducers_post["e" /* ADD_POST_REQUEST */],
-      data: formData
-    });
-  }, [text, imagePaths]);
-  const onClickImageUpload = Object(external_react_["useCallback"])(() => {
-    imageInput.current.click();
-  }, [imageInput.current]);
-  const onChangeImages = Object(external_react_["useCallback"])(e => {
-    console.log('images', e.target.files);
-    const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
-      imageFormData.append('image', f);
-    });
-    dispatch({
-      type: reducers_post["J" /* UPLOAD_IMAGES_REQUEST */],
-      data: imageFormData
-    });
-  }, []);
-  const imageOnClick = Object(external_react_["useCallback"])(index => () => {
-    dispatch({
-      type: reducers_post["y" /* REMOVE_IMAGE */],
-      data: index
-    });
-  }, []);
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(form_default.a, {
-    style: {
-      margin: '10px 0 20px'
-    },
-    encType: "multipart/form-data",
-    onFinish: onSubmit,
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(input_default.a.TextArea, {
-      value: text,
-      onChange: onChangeText,
-      maxLength: 140,
-      placeholder: "Share your story"
-    }), /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("input", {
-        type: "file",
-        name: "image",
-        multiple: true,
-        hidden: true,
-        ref: imageInput,
-        onChange: onChangeImages
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-        onClick: onClickImageUpload,
-        children: "Image Upload"
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-        type: "primary",
-        style: {
-          float: 'right'
-        },
-        htmlType: "submit",
-        children: "Twit"
-      })]
-    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-      children: imagePaths && imagePaths.map((v, i) => /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-        style: {
-          display: 'inline-block'
-        },
-        onClick: imageOnClick(i),
-        onKeyDown: imageOnClick(i),
-        role: "presentation",
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-          src: `http://localhost:3065/${v}`,
-          style: {
-            width: '200px'
-          },
-          alt: v
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-          children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-            children: "Remove"
-          })
-        })]
-      }, v))
-    })]
-  });
-}
-
-/* harmony default export */ var component_PostForm = (PostForm);
-// EXTERNAL MODULE: ./component/PostCard.js + 6 modules
-var PostCard = __webpack_require__("UVsj");
-
-// EXTERNAL MODULE: ./reducers/user.js
-var reducers_user = __webpack_require__("LAVF");
-
-// CONCATENATED MODULE: ./pages/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Home = () => {
-  const {
-    user
-  } = Object(external_react_redux_["useSelector"])(state => state.user);
-  const {
-    mainPosts,
-    hasMorePost,
-    loadPostsLoading,
-    retweetError
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
-  const dispatch = Object(external_react_redux_["useDispatch"])();
-  Object(external_react_["useEffect"])(() => {
-    if (retweetError) {
-      alert(retweetError);
-    }
-  }, [retweetError]);
-  Object(external_react_["useEffect"])(() => {
-    function onScroll() {
-      if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
-        if (hasMorePost && !loadPostsLoading) {
-          var _mainPosts;
-
-          const lastId = (_mainPosts = mainPosts[mainPosts.length - 1]) === null || _mainPosts === void 0 ? void 0 : _mainPosts.id;
-          console.log('lastId: ', lastId);
-          dispatch({
-            type: reducers_post["n" /* LOAD_POSTS_REQUEST */],
-            lastId
-          });
-        }
-      }
-    }
-
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [hasMorePost, loadPostsLoading, mainPosts]);
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(AppLayout["a" /* default */], {
-    children: [user && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_PostForm, {}), mainPosts.map(post => /*#__PURE__*/Object(jsx_runtime_["jsx"])(PostCard["a" /* default */], {
-      post: post
-    }, post.id))]
-  });
-};
-
-const getServerSideProps = configureStore["a" /* default */].getServerSideProps(async context => {
-  const cookie = context.req ? context.req.headers.cookie : '';
-  external_axios_default.a.defaults.headers.Cookie = '';
-
-  if (context.req && cookie) {
-    external_axios_default.a.defaults.headers.Cookie = cookie;
-  }
-
-  context.store.dispatch({
-    type: reducers_user["o" /* LOAD_MY_INFO_REQUEST */]
-  });
-  context.store.dispatch({
-    type: reducers_post["n" /* LOAD_POSTS_REQUEST */]
-  });
-  context.store.dispatch(external_redux_saga_["END"]);
-  await context.store.sagaTask.toPromise();
-});
-/* harmony default export */ var pages = __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
@@ -2089,273 +1819,54 @@ module.exports = _interopRequireDefault;
 
 /***/ }),
 
-/***/ "UVsj":
+/***/ "Uqqx":
+/***/ (function(module, exports) {
+
+module.exports = require("antd/lib/input");
+
+/***/ }),
+
+/***/ "W+IF":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "getServerSideProps", function() { return /* binding */ getServerSideProps; });
 
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__("cDcd");
 
-// EXTERNAL MODULE: external "antd/lib/avatar"
-var avatar_ = __webpack_require__("9ubE");
-var avatar_default = /*#__PURE__*/__webpack_require__.n(avatar_);
-
-// EXTERNAL MODULE: external "antd/lib/comment"
-var comment_ = __webpack_require__("GOli");
-var comment_default = /*#__PURE__*/__webpack_require__.n(comment_);
-
-// EXTERNAL MODULE: external "antd/lib/popover"
-var popover_ = __webpack_require__("27qp");
-var popover_default = /*#__PURE__*/__webpack_require__.n(popover_);
-
-// EXTERNAL MODULE: external "antd/lib/list"
-var list_ = __webpack_require__("4g8T");
-var list_default = /*#__PURE__*/__webpack_require__.n(list_);
-
-// EXTERNAL MODULE: external "antd/lib/card"
-var card_ = __webpack_require__("5rRV");
-var card_default = /*#__PURE__*/__webpack_require__.n(card_);
-
-// EXTERNAL MODULE: external "antd/lib/button"
-var button_ = __webpack_require__("eGmO");
-var button_default = /*#__PURE__*/__webpack_require__.n(button_);
-
-// EXTERNAL MODULE: external "@ant-design/icons"
-var icons_ = __webpack_require__("nZwT");
-
 // EXTERNAL MODULE: external "react-redux"
 var external_react_redux_ = __webpack_require__("h74D");
 
-// EXTERNAL MODULE: ./node_modules/next/link.js
-var next_link = __webpack_require__("YFqc");
-var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
+// EXTERNAL MODULE: external "next/head"
+var head_ = __webpack_require__("xnum");
+var head_default = /*#__PURE__*/__webpack_require__.n(head_);
 
-// EXTERNAL MODULE: external "dayjs"
-var external_dayjs_ = __webpack_require__("boVf");
-var external_dayjs_default = /*#__PURE__*/__webpack_require__.n(external_dayjs_);
+// EXTERNAL MODULE: external "axios"
+var external_axios_ = __webpack_require__("zr5I");
+var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
 
-// EXTERNAL MODULE: external "react-slick"
-var external_react_slick_ = __webpack_require__("O/hg");
-var external_react_slick_default = /*#__PURE__*/__webpack_require__.n(external_react_slick_);
+// EXTERNAL MODULE: external "redux-saga"
+var external_redux_saga_ = __webpack_require__("1fKG");
 
-// EXTERNAL MODULE: external "styled-components"
-var external_styled_components_ = __webpack_require__("Dtiu");
-var external_styled_components_default = /*#__PURE__*/__webpack_require__.n(external_styled_components_);
+// EXTERNAL MODULE: external "next/router"
+var router_ = __webpack_require__("4Q3z");
+var router_default = /*#__PURE__*/__webpack_require__.n(router_);
 
-// CONCATENATED MODULE: ./component/ImagesZoom/styles.js
+// EXTERNAL MODULE: external "swr"
+var external_swr_ = __webpack_require__("aYjl");
+var external_swr_default = /*#__PURE__*/__webpack_require__.n(external_swr_);
 
+// EXTERNAL MODULE: ./store/configureStore.js + 4 modules
+var configureStore = __webpack_require__("AQn3");
 
-const Overlay = external_styled_components_default.a.div`
-    position: fixed;
-    z-index: 5000;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-`;
-const Header = external_styled_components_default.a.div`
-    height: 44px;
-    background: white;
-    position: relative;
-    padding: 0;
-    text-align: center;
+// EXTERNAL MODULE: ./component/AppLayout.js + 2 modules
+var AppLayout = __webpack_require__("1Dl5");
 
-    & h1 {
-        margin: 0;
-        font-size: 17px;
-        color: #333;
-        line-height: 44px;
-    }
-`;
-const CloseBtn = external_styled_components_default()(icons_["CloseOutlined"])`
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 15px;
-    line-height: 14px;
-    cursor: pointer;
-`;
-const SlickWrapper = external_styled_components_default.a.div`
-    height: calc(100%-44px);
-    background: #090909;
-`;
-const ImgWrapper = external_styled_components_default.a.div`
-    padding: 30px;
-    text-align: center;
-    & img {
-        margin: 0 auto;
-        max-height: 750px;
-    }
-`;
-const Indicator = external_styled_components_default.a.div`
-    text-align: center;
-  & > div {
-    width: 75px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 15px;
-    background: #313131;
-    display: inline-block;
-    text-align: center;
-    color: white;
-    font-size: 15px;
-    
-    margin-bottom: 10px;
-  }
-`;
-const Global = external_styled_components_["createGlobalStyle"]`
-    .slick-slide {
-        display: inline-block;
-    }
-`;
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__("F5FC");
-
-// CONCATENATED MODULE: ./component/ImagesZoom/index.js
-
-
-
-
-
-
-const ImagesZoom = ({
-  images,
-  onClose
-}) => {
-  const {
-    0: currentSlide,
-    1: setCurrentSlide
-  } = Object(external_react_["useState"])(0);
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(Overlay, {
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(Global, {}), /*#__PURE__*/Object(jsx_runtime_["jsxs"])(Header, {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("h1", {
-        children: "Detailed Images"
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(CloseBtn, {
-        onClick: onClose,
-        children: "X"
-      })]
-    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(SlickWrapper, {
-      children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(external_react_slick_default.a, {
-          initialSlide: 0,
-          beforeChange: (slide, newSlide) => setCurrentSlide(newSlide),
-          infinite: true,
-          arrows: false,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          children: images && images.map(v => /*#__PURE__*/Object(jsx_runtime_["jsx"])(ImgWrapper, {
-            children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-              src: `http://localhost:3065/${v.src}`,
-              alt: v.src
-            })
-          }, v.src))
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(Indicator, {
-          children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-            children: [currentSlide + 1, ' ', "/", images.length]
-          })
-        })]
-      })
-    })]
-  });
-};
-
-/* harmony default export */ var component_ImagesZoom = (ImagesZoom);
-// CONCATENATED MODULE: ./component/PostImages.js
-
-
-
-
-
-
-
-function PostImages({
-  images
-}) {
-  const {
-    0: showImagesZoom,
-    1: setShowImagesZoom
-  } = Object(external_react_["useState"])(false);
-  const onZoom = Object(external_react_["useCallback"])(() => {
-    setShowImagesZoom(true);
-  }, []);
-  const onClose = Object(external_react_["useCallback"])(() => {
-    setShowImagesZoom(false);
-  }, []);
-
-  if (images.length === 1) {
-    return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(jsx_runtime_["Fragment"], {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-        role: "presentation",
-        style: {
-          display: 'inline-block',
-          width: '50%'
-        },
-        src: `http://localhost:3065/${images[0].src}`,
-        alt: images[0].src,
-        onClick: onZoom
-      }), showImagesZoom && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_ImagesZoom, {
-        images: images,
-        onClose: onClose
-      })]
-    });
-  }
-
-  if (images.length === 2) {
-    return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(jsx_runtime_["Fragment"], {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-        role: "presentation",
-        style: {
-          display: 'inline-block',
-          width: '50%'
-        },
-        src: `http://localhost:3065/${images[0].src}`,
-        alt: images[0].src,
-        onClick: onZoom
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-        role: "presentation",
-        style: {
-          display: 'inline-block',
-          width: '50%'
-        },
-        src: `http://localhost:3065/${images[1].src}`,
-        alt: images[1].src,
-        onClick: onZoom
-      }), showImagesZoom && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_ImagesZoom, {
-        images: images,
-        onClose: onClose
-      })]
-    });
-  }
-
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-      role: "presentation",
-      width: "50%",
-      src: `http://localhost:3065/${images[0].src}`,
-      alt: images[0].src,
-      onClick: onZoom
-    }), /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-      role: "presentation",
-      style: {
-        display: 'inline-block',
-        width: '50%',
-        textAlign: 'center',
-        verticalAlign: 'middle'
-      },
-      onClick: onZoom,
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["PlusOutlined"], {}), /*#__PURE__*/Object(jsx_runtime_["jsx"])("br", {}), images.length - 1, "\uAC1C\uC758 \uC0AC\uC9C4 \uB354 \uBCF4\uAE30"]
-    }), showImagesZoom && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_ImagesZoom, {
-      images: images,
-      onClose: onClose
-    })]
-  });
-}
-
-PostImages.defaultProps = {
-  images: []
-};
-/* harmony default export */ var component_PostImages = (PostImages);
 // EXTERNAL MODULE: external "antd/lib/form"
 var form_ = __webpack_require__("foLw");
 var form_default = /*#__PURE__*/__webpack_require__.n(form_);
@@ -2367,430 +1878,258 @@ var input_default = /*#__PURE__*/__webpack_require__.n(input_);
 // EXTERNAL MODULE: ./hooks/useInput.js
 var useInput = __webpack_require__("3zrx");
 
-// EXTERNAL MODULE: ./reducers/post.js
-var reducers_post = __webpack_require__("p+NB");
-
-// CONCATENATED MODULE: ./component/CommentForm.js
-
-
-
-
-
-
-
-
-
-
-function CommentForm({
-  post
-}) {
-  const dispatch = Object(external_react_redux_["useDispatch"])();
-  const [commentText, onChangeCommentText, setCommentText] = Object(useInput["a" /* default */])('');
-  const id = Object(external_react_redux_["useSelector"])(state => {
-    var _state$user$user;
-
-    return (_state$user$user = state.user.user) === null || _state$user$user === void 0 ? void 0 : _state$user$user.id;
-  });
-  const {
-    addCommentDone,
-    addCommentLoading
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
-  Object(external_react_["useEffect"])(() => {
-    if (addCommentDone) {
-      setCommentText('');
-    }
-  }, [addCommentDone]);
-  const onSubmitComment = Object(external_react_["useCallback"])(() => {
-    console.log(post.id, commentText);
-    dispatch({
-      type: reducers_post["b" /* ADD_COMMENT_REQUEST */],
-      data: {
-        content: commentText,
-        postId: post.id,
-        userId: id
-      }
-    });
-  }, [commentText, id]);
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])(form_default.a, {
-    onFinish: onSubmitComment,
-    children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])(form_default.a.Item, {
-      style: {
-        position: 'relative',
-        margin: 0
-      },
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(input_default.a.TextArea, {
-        value: commentText,
-        onChange: onChangeCommentText,
-        rows: 4
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-        style: {
-          position: 'absolute',
-          right: 0,
-          bottom: -40,
-          zIndex: 1
-        },
-        type: "primary",
-        htmlType: "submit",
-        loading: addCommentLoading,
-        children: "Twit"
-      })]
-    })
-  });
-}
-
-/* harmony default export */ var component_CommentForm = (CommentForm);
-// CONCATENATED MODULE: ./component/PostCardContent.js
-
-
-
-
-
-
-
-
-
-const {
-  TextArea
-} = input_default.a;
-
-function PostCardContent({
-  postData,
-  editMode,
-  onModifyPost,
-  onClickModify
-}) {
-  const {
-    modifyPostLoading,
-    modifyPostDone
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
-  const [editText, onChangeText, setEditText] = Object(useInput["a" /* default */])(postData);
-  Object(external_react_["useEffect"])(() => {
-    if (modifyPostDone) {
-      onClickModify();
-    }
-  }, [modifyPostDone]);
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-    children: editMode ? /*#__PURE__*/Object(jsx_runtime_["jsxs"])(jsx_runtime_["Fragment"], {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(TextArea, {
-        value: editText,
-        onChange: onChangeText
-      }), /*#__PURE__*/Object(jsx_runtime_["jsxs"])(button_default.a.Group, {
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-          loading: modifyPostLoading,
-          onClick: onModifyPost(editText),
-          children: "\uC218\uC815"
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-          type: "danger",
-          onClick: onClickModify,
-          children: "\uC218\uC815 \uCDE8\uC18C"
-        })]
-      })]
-    }) : postData.split(/(#[^\s#]+)/g).map(v => {
-      if (v.match(/(#[^\s#]+)/)) {
-        return /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-          href: `/hashtag/${v.slice(1)}`,
-          children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("a", {
-            children: v
-          })
-        }, v);
-      }
-
-      return v;
-    })
-  });
-}
-
-PostCardContent.defaultProps = {
-  editMode: false
-};
-/* harmony default export */ var component_PostCardContent = (PostCardContent);
 // EXTERNAL MODULE: ./reducers/user.js
 var reducers_user = __webpack_require__("LAVF");
 
-// CONCATENATED MODULE: ./component/FollowButton.js
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__("F5FC");
+
+// CONCATENATED MODULE: ./component/NickNameEditForm.js
 
 
 
 
 
 
-const FollowButton = ({
-  post
-}) => {
-  var _user$Following;
 
-  const dispatch = Object(external_react_redux_["useDispatch"])();
+
+function NickNameEditForm() {
+  const style = Object(external_react_["useMemo"])(() => ({
+    marginBottom: '20px',
+    border: '1px solid #d9d9d9',
+    padding: '10px'
+  }), []);
   const {
-    user,
-    followLoading,
-    unfollowLoading
+    user
   } = Object(external_react_redux_["useSelector"])(state => state.user);
-  const isFollowing = user === null || user === void 0 ? void 0 : (_user$Following = user.Following) === null || _user$Following === void 0 ? void 0 : _user$Following.find(v => v.id === post.User.id);
-  const onClickButton = Object(external_react_["useCallback"])(() => {
-    if (isFollowing) {
-      dispatch({
-        type: reducers_user["H" /* UNFOLLOW_REQUEST */],
-        data: post.User.id
-      });
-      console.log('isFollowing: ', isFollowing);
-      console.log('isFollowing2: ', user === null || user === void 0 ? void 0 : user.Following.find(v => v.id === post.User.id));
-      console.log('user: ', user.Following);
-    } else {
-      dispatch({
-        type: reducers_user["f" /* FOLLOW_REQUEST */],
-        data: post.User.id
-      });
-      console.log('isFollowing: ', isFollowing);
-      console.log('isFollowing2: ', user === null || user === void 0 ? void 0 : user.Following.find(v => v.id === post.User.id));
-      console.log('user: ', user.Following);
-    }
-  }, [isFollowing]);
-
-  if (post.User.id === user.id) {
-    return null;
-  }
-
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-    loading: followLoading || unfollowLoading,
-    onClick: onClickButton,
-    children: isFollowing ? '언팔로우' : '팔로우'
-  });
-};
-
-/* harmony default export */ var component_FollowButton = (FollowButton);
-// CONCATENATED MODULE: ./component/PostCard.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const relativeTime = __webpack_require__("jYNn");
-
-external_dayjs_default.a.extend(relativeTime);
-external_dayjs_default.a.locale('ko');
-
-function PostCard({
-  post
-}) {
-  const {
-    0: commentFormOpened,
-    1: setCommentFormOpened
-  } = Object(external_react_["useState"])(false);
-  const id = Object(external_react_redux_["useSelector"])(state => {
-    var _state$user$user;
-
-    return (_state$user$user = state.user.user) === null || _state$user$user === void 0 ? void 0 : _state$user$user.id;
-  });
-  const {
-    removePostLoading
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
+  const [nickname, onChangeNickname] = Object(useInput["a" /* default */])((user === null || user === void 0 ? void 0 : user.nickname) || '');
   const dispatch = Object(external_react_redux_["useDispatch"])();
-  const {
-    0: editMode,
-    1: setEditMode
-  } = Object(external_react_["useState"])(false);
-  const onLike = Object(external_react_["useCallback"])(() => {
-    if (!id) {
-      return alert('로그인이 필요합니다.');
-    }
-
-    return dispatch({
-      type: reducers_post["h" /* LIKE_POST_REQUEST */],
-      data: post.id
-    });
-  }, [id]);
-  const onUnLike = Object(external_react_["useCallback"])(() => {
-    if (!id) {
-      return alert('로그인이 필요합니다.');
-    }
-
-    return dispatch({
-      type: reducers_post["G" /* UNLIKE_POST_REQUEST */],
-      data: post.id
-    });
-  }, [id]);
-  const onRetweet = Object(external_react_["useCallback"])(() => {
-    if (!id) {
-      return alert('로그인이 필요합니다.');
-    }
-
-    return dispatch({
-      type: reducers_post["D" /* RETWEET_REQUEST */],
-      data: post.id
-    });
-  }, [id]);
-  const onToggleComment = Object(external_react_["useCallback"])(() => {
-    setCommentFormOpened(prev => !prev);
-  }, []);
-  const onRemovePost = Object(external_react_["useCallback"])(() => {
-    if (!id) {
-      return alert('로그인이 필요합니다.');
-    }
-
-    return dispatch({
-      type: reducers_post["A" /* REMOVE_POST_REQUEST */],
-      data: post.id
-    });
-  }, [id]);
-  const onClickModify = Object(external_react_["useCallback"])(() => {
-    console.log('Click Modify');
-    console.log('before setEditMode: ', editMode);
-    setEditMode(prev => !prev);
-    console.log('after setEditMode: ', editMode);
-  }, []);
-  const onModifyPost = Object(external_react_["useCallback"])(editText => () => {
+  const onSubmit = Object(external_react_["useCallback"])(() => {
     dispatch({
-      type: reducers_post["w" /* MODIFY_POST_REQUEST */],
-      data: {
-        postId: post.id,
-        content: editText
-      }
+      type: reducers_user["c" /* CHANGE_NICKNAME_REQUEST */],
+      data: nickname
     });
-  }, [post]);
-  const liked = post.Likers.find(v => v.id === id);
-  const now = external_dayjs_default()();
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-    style: {
-      marginBottom: 10
-    },
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(card_default.a, {
-      cover: post.Images[0] && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_PostImages, {
-        images: post.Images
-      }),
-      actions: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["RetweetOutlined"], {
-        onClick: onRetweet
-      }, "retweet"), liked ? /*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["HeartTwoTone"], {
-        twoToneColor: "eb2f96",
-        onClick: onUnLike
-      }, "heart") : /*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["HeartOutlined"], {
-        onClick: onLike
-      }, "heart"), /*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["MessageOutlined"], {
-        onClick: onToggleComment
-      }, "comment"), /*#__PURE__*/Object(jsx_runtime_["jsx"])(popover_default.a, {
-        content: /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a.Group, {
-          children: id && post.User.id === id ? /*#__PURE__*/Object(jsx_runtime_["jsxs"])(jsx_runtime_["Fragment"], {
-            children: [!post.RetweetId && /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-              onClick: onClickModify,
-              children: "Modify"
-            }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-              type: "danger",
-              loading: removePostLoading,
-              onClick: onRemovePost,
-              children: "Remove"
-            })]
-          }) : /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-            children: "Report"
-          })
-        }),
-        children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["EllipsisOutlined"], {})
-      }, "more")],
-      title: post.RetweetId ? `${post.User.nickname} 님이 리트윗 하셨습니다.` : null,
-      extra: id && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_FollowButton, {
-        post: post
-      }),
-      children: post.RetweetId && post.Retweet ? /*#__PURE__*/Object(jsx_runtime_["jsxs"])(card_default.a, {
-        cover: post.Retweet.Images[0] && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_PostImages, {
-          images: post.Retweet.Images
-        }),
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-          style: {
-            float: 'right'
-          },
-          children: external_dayjs_default()(post.createdAt).diff(now, 'day') >= 2 ? external_dayjs_default()(post.createdAt).format('YYYY.MM.DD') : external_dayjs_default()(post.createdAt).fromNow()
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(card_default.a.Meta, {
-          avatar: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-            href: `/user/${post.Retweet.User.id}`,
-            children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("a", {
-              children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(avatar_default.a, {
-                children: post.Retweet.User.nickname[0]
-              })
-            })
-          }),
-          title: post.Retweet.User.nickname,
-          description: /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_PostCardContent, {
-            postData: post.Retweet.content,
-            onModifyPost: onModifyPost,
-            onClickModify: onClickModify
-          })
-        })]
-      }) : /*#__PURE__*/Object(jsx_runtime_["jsxs"])(jsx_runtime_["Fragment"], {
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-          style: {
-            float: 'right'
-          },
-          children: external_dayjs_default()(post.createdAt).diff(now, 'day') >= 2 ? external_dayjs_default()(post.createdAt).format('YYYY.MM.DD') : external_dayjs_default()(post.createdAt).fromNow()
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(card_default.a.Meta, {
-          avatar: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-            href: `/user/${post.User.id}`,
-            children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("a", {
-              children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(avatar_default.a, {
-                children: post.User.nickname[0]
-              })
-            })
-          }),
-          title: post.User.nickname,
-          description: /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_PostCardContent, {
-            editMode: editMode,
-            postData: post.content,
-            onModifyPost: onModifyPost,
-            onClickModify: onClickModify
-          })
-        })]
-      })
-    }), commentFormOpened && /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(component_CommentForm, {
-        post: post
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(list_default.a, {
-        header: `${post.Comments.length}개의 댓글`,
-        itemLayout: "horizontal",
-        dataSource: post.Comments,
-        renderItem: item => /*#__PURE__*/Object(jsx_runtime_["jsxs"])("li", {
-          children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-            style: {
-              float: 'right'
-            },
-            children: external_dayjs_default()(post.createdAt).diff(now, 'day') >= 2 ? external_dayjs_default()(post.createdAt).format('YYYY.MM.DD') : external_dayjs_default()(post.createdAt).fromNow()
-          }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(comment_default.a, {
-            author: item.User.nickname,
-            avatar: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-              href: `/user/${item.User}`,
-              children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("a", {
-                children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(avatar_default.a, {
-                  children: item.User.nickname[0]
-                })
-              })
-            }),
-            content: item.content
-          })]
-        })
-      })]
-    })]
+  }, [nickname]);
+  return /*#__PURE__*/Object(jsx_runtime_["jsx"])(form_default.a, {
+    style: style,
+    children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(input_default.a.Search, {
+      value: nickname,
+      onChange: onChangeNickname,
+      addonBefore: "nickName",
+      enterButton: "Modify",
+      onSearch: onSubmit
+    })
   });
 }
 
-/* harmony default export */ var component_PostCard = __webpack_exports__["a"] = (PostCard);
+/* harmony default export */ var component_NickNameEditForm = (NickNameEditForm);
+// EXTERNAL MODULE: external "antd/lib/button"
+var button_ = __webpack_require__("eGmO");
+var button_default = /*#__PURE__*/__webpack_require__.n(button_);
 
-/***/ }),
+// EXTERNAL MODULE: external "antd/lib/list"
+var list_ = __webpack_require__("4g8T");
+var list_default = /*#__PURE__*/__webpack_require__.n(list_);
 
-/***/ "Uqqx":
-/***/ (function(module, exports) {
+// EXTERNAL MODULE: external "antd/lib/card"
+var card_ = __webpack_require__("5rRV");
+var card_default = /*#__PURE__*/__webpack_require__.n(card_);
 
-module.exports = require("antd/lib/input");
+// EXTERNAL MODULE: external "@ant-design/icons"
+var icons_ = __webpack_require__("nZwT");
+
+// CONCATENATED MODULE: ./component/FollowList.js
+
+ // import axios from 'axios';
+// import useSWR, {mutate} from 'swr';
+
+
+
+
+
+
+
+
+function FollowList({
+  header,
+  followData,
+  mutate,
+  onClickMore,
+  loading
+}) {
+  const dispatch = Object(external_react_redux_["useDispatch"])();
+
+  const onCancel = id => () => {
+    if (header === 'Following') {
+      dispatch({
+        type: reducers_user["H" /* UNFOLLOW_REQUEST */],
+        data: id
+      });
+      mutate(prev => prev.filter(d => d.id !== id));
+    } else {
+      dispatch({
+        type: reducers_user["A" /* REMOVE_FOLLOWER_REQUEST */],
+        data: id
+      });
+      mutate(prev => prev.filter(d => d.id !== id));
+    }
+  };
+
+  return /*#__PURE__*/Object(jsx_runtime_["jsx"])(list_default.a, {
+    style: {
+      marginBottom: 20
+    },
+    grid: {
+      gutter: 4,
+      xs: 2,
+      md: 3
+    },
+    size: "small",
+    header: /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
+      children: header
+    }),
+    loadMore: /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
+      style: {
+        textAlign: 'center',
+        margin: '10px 0'
+      },
+      children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
+        onClick: onClickMore,
+        loading: loading,
+        children: "Load More"
+      })
+    }),
+    bordered: true,
+    dataSource: followData,
+    renderItem: item => /*#__PURE__*/Object(jsx_runtime_["jsx"])(list_default.a.Item, {
+      style: {
+        marginTop: 20
+      },
+      children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(card_default.a, {
+        actions: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(icons_["StopOutlined"], {
+          onClick: onCancel(item.id)
+        }, "stop")],
+        children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(card_default.a.Meta, {
+          description: item.nickname
+        })
+      })
+    })
+  });
+}
+
+/* harmony default export */ var component_FollowList = (FollowList);
+// CONCATENATED MODULE: ./pages/profile.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const fetcher = url => external_axios_default.a.get(url, {
+  withCredentials: true
+}).then(result => result.data);
+
+const Profile = () => {
+  // const dispatch = useDispatch();
+  const {
+    user
+  } = Object(external_react_redux_["useSelector"])(state => state.user);
+  const {
+    0: followerLimit,
+    1: setFollowerLimit
+  } = Object(external_react_["useState"])(3);
+  const {
+    0: followingLimit,
+    1: setFollowingLimit
+  } = Object(external_react_["useState"])(3);
+  const {
+    data: followersData = [],
+    error: followerError,
+    mutate: mutateFollower
+  } = external_swr_default()(`http://localhost:3065/user/followers?limit=${followerLimit}`, fetcher);
+  const {
+    data: followingsData = [],
+    error: followingError,
+    mutate: mutateFollowing
+  } = external_swr_default()(`http://localhost:3065/user/followings?limit=${followingLimit}`, fetcher);
+  Object(external_react_["useEffect"])(() => {
+    if (!(user && user.id)) {
+      router_default.a.push('/');
+    }
+  }, [user && user.id]);
+  /*  useEffect(() => {
+    dispatch({
+      type: LOAD_FOLLOWERS_REQUEST,
+    });
+    dispatch({
+      type: LOAD_FOLLOWINGS_REQUEST,
+    });
+  }, []); */
+
+  const loadMoreFollowing = Object(external_react_["useCallback"])(() => {
+    setFollowingLimit(prev => prev + 3);
+  }, []);
+  const loadMoreFollower = Object(external_react_["useCallback"])(() => {
+    setFollowerLimit(prev => prev + 3);
+  }, []);
+
+  if (!user) {
+    return '내 정보 로딩 중...';
+  }
+
+  if (followerError || followingError) {
+    console.error(followerError || followingError);
+    return '팔로윙||팔로워 로딩 중 에러가 발생합니다';
+  }
+
+  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(jsx_runtime_["Fragment"], {
+    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(head_default.a, {
+      children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("title", {
+        children: "Profile | NodeBird"
+      })
+    }), /*#__PURE__*/Object(jsx_runtime_["jsxs"])(AppLayout["a" /* default */], {
+      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(component_NickNameEditForm, {}), /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_FollowList, {
+        header: "Following",
+        followData: followingsData,
+        mutate: mutateFollowing,
+        onClickMore: loadMoreFollowing,
+        loading: !followingsData && !followingError
+      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_FollowList, {
+        header: "Follower",
+        followData: followersData,
+        mutate: mutateFollower,
+        onClickMore: loadMoreFollower,
+        loading: !followersData && !followerError
+      })]
+    })]
+  });
+};
+
+const getServerSideProps = configureStore["a" /* default */].getServerSideProps(async context => {
+  const cookie = context.req ? context.req.headers.cookie : '';
+  external_axios_default.a.defaults.headers.Cookie = '';
+
+  if (context.req && cookie) {
+    external_axios_default.a.defaults.headers.Cookie = cookie;
+  }
+
+  context.store.dispatch({
+    type: reducers_user["o" /* LOAD_MY_INFO_REQUEST */]
+  });
+  context.store.dispatch(external_redux_saga_["END"]);
+  await context.store.sagaTask.toPromise();
+});
+/* harmony default export */ var profile = __webpack_exports__["default"] = (Profile);
 
 /***/ }),
 
@@ -2961,10 +2300,10 @@ module.exports = require("antd/lib/menu");
 
 /***/ }),
 
-/***/ "boVf":
+/***/ "aYjl":
 /***/ (function(module, exports) {
 
-module.exports = require("dayjs");
+module.exports = require("swr");
 
 /***/ }),
 
@@ -4445,13 +3784,6 @@ function parseRelativeUrl(url, base) {
 
 /***/ }),
 
-/***/ "jYNn":
-/***/ (function(module, exports) {
-
-module.exports = require("dayjs/plugin/relativeTime");
-
-/***/ }),
-
 /***/ "nOHt":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4993,6 +4325,13 @@ module.exports = require("antd/lib/col");
 "use strict";
 exports.__esModule=true;exports.normalizePathSep=normalizePathSep;exports.denormalizePagePath=denormalizePagePath;function normalizePathSep(path){return path.replace(/\\/g,'/');}function denormalizePagePath(page){page=normalizePathSep(page);if(page.startsWith('/index/')){page=page.slice(6);}else if(page==='/index'){page='/';}return page;}
 //# sourceMappingURL=denormalize-page-path.js.map
+
+/***/ }),
+
+/***/ "xnum":
+/***/ (function(module, exports) {
+
+module.exports = require("next/head");
 
 /***/ }),
 

@@ -1,7 +1,7 @@
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
-/******/ 	var installedModules = require('../ssr-module-cache.js');
+/******/ 	var installedModules = require('../../ssr-module-cache.js');
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -593,14 +593,6 @@ function assign(target, ...searchParamsList) {
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("RNiq");
-
-
-/***/ }),
-
 /***/ "4Q3z":
 /***/ (function(module, exports) {
 
@@ -750,6 +742,14 @@ function formatUrl(urlObj) {
   search = search.replace('#', '%23');
   return `${protocol}${host}${pathname}${search}${hash}`;
 }
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("Qrvq");
+
 
 /***/ }),
 
@@ -1429,6 +1429,13 @@ module.exports = require("styled-components");
 
 /***/ }),
 
+/***/ "Exp3":
+/***/ (function(module, exports) {
+
+module.exports = require("antd");
+
+/***/ }),
+
 /***/ "F5FC":
 /***/ (function(module, exports) {
 
@@ -1805,57 +1812,36 @@ module.exports = require("next/dist/next-server/lib/router-context.js");
 
 /***/ }),
 
-/***/ "RNiq":
+/***/ "Qrvq":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "getServerSideProps", function() { return /* binding */ getServerSideProps; });
-
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__("cDcd");
-
-// EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__("zr5I");
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
-
-// EXTERNAL MODULE: external "react-redux"
-var external_react_redux_ = __webpack_require__("h74D");
-
-// EXTERNAL MODULE: external "redux-saga"
-var external_redux_saga_ = __webpack_require__("1fKG");
-
-// EXTERNAL MODULE: ./store/configureStore.js + 4 modules
-var configureStore = __webpack_require__("AQn3");
-
-// EXTERNAL MODULE: ./component/AppLayout.js + 2 modules
-var AppLayout = __webpack_require__("1Dl5");
-
-// EXTERNAL MODULE: external "antd/lib/form"
-var form_ = __webpack_require__("foLw");
-var form_default = /*#__PURE__*/__webpack_require__.n(form_);
-
-// EXTERNAL MODULE: external "antd/lib/input"
-var input_ = __webpack_require__("Uqqx");
-var input_default = /*#__PURE__*/__webpack_require__.n(input_);
-
-// EXTERNAL MODULE: external "antd/lib/button"
-var button_ = __webpack_require__("eGmO");
-var button_default = /*#__PURE__*/__webpack_require__.n(button_);
-
-// EXTERNAL MODULE: ./reducers/post.js
-var reducers_post = __webpack_require__("p+NB");
-
-// EXTERNAL MODULE: ./hooks/useInput.js
-var useInput = __webpack_require__("3zrx");
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__("F5FC");
-
-// CONCATENATED MODULE: ./component/PostForm.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getServerSideProps", function() { return getServerSideProps; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("cDcd");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("1fKG");
+/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("h74D");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("4Q3z");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("zr5I");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("YFqc");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("xnum");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("Exp3");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _store_configureStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("AQn3");
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("LAVF");
+/* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("p+NB");
+/* harmony import */ var _component_AppLayout__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("1Dl5");
+/* harmony import */ var _component_PostCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("UVsj");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("F5FC");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__);
+// user/[id].js
 
 
 
@@ -1866,146 +1852,28 @@ var jsx_runtime_ = __webpack_require__("F5FC");
 
 
 
-function PostForm() {
-  const dispatch = Object(external_react_redux_["useDispatch"])();
-  const [text, onChangeText, SetText] = Object(useInput["a" /* default */])();
+
+
+
+
+
+
+const User = () => {
+  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_3__["useRouter"])();
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
   const {
-    imagePaths,
-    addPostDone
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
-  const imageInput = Object(external_react_["useRef"])();
-  Object(external_react_["useEffect"])(() => {
-    if (addPostDone) {
-      SetText('');
-    }
-  }, [addPostDone]);
-  const onSubmit = Object(external_react_["useCallback"])(() => {
-    if (!text || !text.trim()) {
-      return alert('게시글을 작성하세요');
-    }
-
-    const formData = new FormData();
-    imagePaths.forEach(p => {
-      formData.append('image', p);
-    });
-    formData.append('content', text);
-    return dispatch({
-      type: reducers_post["e" /* ADD_POST_REQUEST */],
-      data: formData
-    });
-  }, [text, imagePaths]);
-  const onClickImageUpload = Object(external_react_["useCallback"])(() => {
-    imageInput.current.click();
-  }, [imageInput.current]);
-  const onChangeImages = Object(external_react_["useCallback"])(e => {
-    console.log('images', e.target.files);
-    const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
-      imageFormData.append('image', f);
-    });
-    dispatch({
-      type: reducers_post["J" /* UPLOAD_IMAGES_REQUEST */],
-      data: imageFormData
-    });
-  }, []);
-  const imageOnClick = Object(external_react_["useCallback"])(index => () => {
-    dispatch({
-      type: reducers_post["y" /* REMOVE_IMAGE */],
-      data: index
-    });
-  }, []);
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(form_default.a, {
-    style: {
-      margin: '10px 0 20px'
-    },
-    encType: "multipart/form-data",
-    onFinish: onSubmit,
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])(input_default.a.TextArea, {
-      value: text,
-      onChange: onChangeText,
-      maxLength: 140,
-      placeholder: "Share your story"
-    }), /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("input", {
-        type: "file",
-        name: "image",
-        multiple: true,
-        hidden: true,
-        ref: imageInput,
-        onChange: onChangeImages
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-        onClick: onClickImageUpload,
-        children: "Image Upload"
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-        type: "primary",
-        style: {
-          float: 'right'
-        },
-        htmlType: "submit",
-        children: "Twit"
-      })]
-    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-      children: imagePaths && imagePaths.map((v, i) => /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-        style: {
-          display: 'inline-block'
-        },
-        onClick: imageOnClick(i),
-        onKeyDown: imageOnClick(i),
-        role: "presentation",
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-          src: `http://localhost:3065/${v}`,
-          style: {
-            width: '200px'
-          },
-          alt: v
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-          children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(button_default.a, {
-            children: "Remove"
-          })
-        })]
-      }, v))
-    })]
-  });
-}
-
-/* harmony default export */ var component_PostForm = (PostForm);
-// EXTERNAL MODULE: ./component/PostCard.js + 6 modules
-var PostCard = __webpack_require__("UVsj");
-
-// EXTERNAL MODULE: ./reducers/user.js
-var reducers_user = __webpack_require__("LAVF");
-
-// CONCATENATED MODULE: ./pages/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Home = () => {
-  const {
-    user
-  } = Object(external_react_redux_["useSelector"])(state => state.user);
+    id
+  } = router.query;
   const {
     mainPosts,
     hasMorePost,
-    loadPostsLoading,
-    retweetError
-  } = Object(external_react_redux_["useSelector"])(state => state.post);
-  const dispatch = Object(external_react_redux_["useDispatch"])();
-  Object(external_react_["useEffect"])(() => {
-    if (retweetError) {
-      alert(retweetError);
-    }
-  }, [retweetError]);
-  Object(external_react_["useEffect"])(() => {
+    loadPostsLoading
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(state => state.post);
+  const {
+    userInfo,
+    user
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(state => state.user);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     function onScroll() {
       if (window.pageYOffset + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
         if (hasMorePost && !loadPostsLoading) {
@@ -2014,8 +1882,9 @@ const Home = () => {
           const lastId = (_mainPosts = mainPosts[mainPosts.length - 1]) === null || _mainPosts === void 0 ? void 0 : _mainPosts.id;
           console.log('lastId: ', lastId);
           dispatch({
-            type: reducers_post["n" /* LOAD_POSTS_REQUEST */],
-            lastId
+            type: _reducers_post__WEBPACK_IMPORTED_MODULE_10__[/* LOAD_USER_POSTS_REQUEST */ "t"],
+            lastId,
+            data: id
           });
         }
       }
@@ -2025,32 +1894,82 @@ const Home = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, [hasMorePost, loadPostsLoading, mainPosts]);
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(AppLayout["a" /* default */], {
-    children: [user && /*#__PURE__*/Object(jsx_runtime_["jsx"])(component_PostForm, {}), mainPosts.map(post => /*#__PURE__*/Object(jsx_runtime_["jsx"])(PostCard["a" /* default */], {
-      post: post
-    }, post.id))]
+  }, [hasMorePost, id, mainPosts.length]);
+  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsxs"])(_component_AppLayout__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"], {
+    children: [userInfo && /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsxs"])(next_head__WEBPACK_IMPORTED_MODULE_6___default.a, {
+      children: [/*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsxs"])("title", {
+        children: [userInfo.nickname, "\uB2D8\uC758 \uAE00"]
+      }), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("meta", {
+        name: "description",
+        content: `${userInfo.nickname}님의 게시글`
+      }), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("meta", {
+        name: "og:title",
+        content: `${userInfo.nickname}님의 게시글`
+      }), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("meta", {
+        name: "og:description",
+        content: `${userInfo.nickname}님의 게시글`
+      }), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("meta", {
+        name: "og:image",
+        content: "http://nodebird.com/favicon.ico"
+      }), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("meta", {
+        name: "og:url",
+        content: `https://nodebird.com/pot.${id}`
+      })]
+    }), userInfo && userInfo.id !== (user === null || user === void 0 ? void 0 : user.id) ? /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])(antd__WEBPACK_IMPORTED_MODULE_7__["Card"], {
+      style: {
+        marginBottom: 20
+      },
+      actions: [/*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsxs"])("div", {
+        children: ["Twit", /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("br", {}), userInfo.Posts]
+      }, "twit"), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsxs"])("div", {
+        children: ["Following", /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("br", {}), userInfo.Following]
+      }, "followings"), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsxs"])("div", {
+        children: ["Follower", /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("br", {}), userInfo.Follower]
+      }, "followers")],
+      children: /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])(antd__WEBPACK_IMPORTED_MODULE_7__["Card"].Meta, {
+        title: userInfo.nickname,
+        avatar: /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          href: `/user/${userInfo.id}`,
+          children: /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])("a", {
+            children: /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])(antd__WEBPACK_IMPORTED_MODULE_7__["Avatar"], {
+              children: userInfo.nickname[0]
+            })
+          })
+        })
+      })
+    }) : null, ";", mainPosts.map(p => /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__["jsx"])(_component_PostCard__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"], {
+      post: p
+    }, p.id))]
   });
 };
 
-const getServerSideProps = configureStore["a" /* default */].getServerSideProps(async context => {
+const getServerSideProps = _store_configureStore__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"].getServerSideProps(async context => {
   const cookie = context.req ? context.req.headers.cookie : '';
-  external_axios_default.a.defaults.headers.Cookie = '';
+  axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.Cookie = '';
 
   if (context.req && cookie) {
-    external_axios_default.a.defaults.headers.Cookie = cookie;
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.Cookie = cookie;
   }
 
   context.store.dispatch({
-    type: reducers_user["o" /* LOAD_MY_INFO_REQUEST */]
+    type: _reducers_user__WEBPACK_IMPORTED_MODULE_9__[/* LOAD_MY_INFO_REQUEST */ "o"]
   });
   context.store.dispatch({
-    type: reducers_post["n" /* LOAD_POSTS_REQUEST */]
+    type: _reducers_post__WEBPACK_IMPORTED_MODULE_10__[/* LOAD_USER_POSTS_REQUEST */ "t"],
+    data: context.params.id
   });
-  context.store.dispatch(external_redux_saga_["END"]);
+  context.store.dispatch({
+    type: _reducers_user__WEBPACK_IMPORTED_MODULE_9__[/* LOAD_USER_INFO_REQUEST */ "r"],
+    data: context.params.id
+  });
+  context.store.dispatch(redux_saga__WEBPACK_IMPORTED_MODULE_1__["END"]);
   await context.store.sagaTask.toPromise();
+  console.log('getState', context.store.getState().post.mainPosts);
+  return {
+    props: {}
+  };
 });
-/* harmony default export */ var pages = __webpack_exports__["default"] = (Home);
+/* harmony default export */ __webpack_exports__["default"] = (User);
 
 /***/ }),
 
@@ -4993,6 +4912,13 @@ module.exports = require("antd/lib/col");
 "use strict";
 exports.__esModule=true;exports.normalizePathSep=normalizePathSep;exports.denormalizePagePath=denormalizePagePath;function normalizePathSep(path){return path.replace(/\\/g,'/');}function denormalizePagePath(page){page=normalizePathSep(page);if(page.startsWith('/index/')){page=page.slice(6);}else if(page==='/index'){page='/';}return page;}
 //# sourceMappingURL=denormalize-page-path.js.map
+
+/***/ }),
+
+/***/ "xnum":
+/***/ (function(module, exports) {
+
+module.exports = require("next/head");
 
 /***/ }),
 
