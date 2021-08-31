@@ -1,12 +1,8 @@
-back/uploads/
+#first line
 
-react-snsProject.pem
-.next
-.env
-node_modules/
-back/node_modules
-front/node_modules
 node_modules
-front/.next
-test1.js
 test1
+test1.js
+react-snsProject.pem
+.env
+uploads
