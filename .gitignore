@@ -1,0 +1,6 @@
+back/uploads/
+
+node_modules
+react-snsProject.pem
+.next
+.env
