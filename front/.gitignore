@@ -1,3 +1,4 @@
-.env
 react-snsProject.pem
+config/config.js
+.next
 node_modules
