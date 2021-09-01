@@ -46,7 +46,7 @@ const About = () => {
   );
 };
 
-export const getStaticProps = wrapper.getStaticProps(async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
   context.store.dispatch({
     type: LOAD_USER_INFO_REQUEST,
     data: 1,
