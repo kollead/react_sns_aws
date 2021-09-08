@@ -49,7 +49,7 @@ app.use(session({
   cookie: {
     httpOnly: true,
     secure: false,
-    domain: process.env.NODE_ENV === 'production' && '.nodebird.com'
+    domain: process.env.NODE_ENV === 'production' && '.kollid.me'
   },
 }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
