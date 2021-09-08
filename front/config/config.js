@@ -1,1 +1,1 @@
-exports.backUrl = 'http://52.78.87.209';
+exports.backUrl = 'http://api.kollid.me';

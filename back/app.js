@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(cors({
-  origin: ['http://localhost:3060', 'reactNodeSns.com', 'http://3.34.255.136'],
+  origin: ['http://localhost:3060', 'http://kollid.me'],
   credentials: true,
 }));
 app.use('/', express.static(path.join(__dirname, 'uploads')));
