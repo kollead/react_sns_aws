@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 
 const {Post, Image, User, Comment, Hashtag} = require('../models');
 const {isLoggedIn} = require("./middleware");
@@ -16,16 +18,19 @@ try {
 
 }
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3,
+  region: 'ap-northeast-2',
+})
+
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, 'uploads');
-    },
-    filename(req, file, done) {
-      const ext = path.extname(file.originalname); //확장자 추출
-      const basename = path.basename(file.originalname, ext);
-      done(null, basename + '_' + new Date().getTime() + ext);
-    },
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: 'kollidbucket',
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`)
+    }
   }),
   limits: { fileSize: 20*1024*1024 }, //20mb
 });
@@ -127,7 +132,7 @@ router.delete('/:postId', isLoggedIn, async (req, res, next) => {
 
 router.post('/images', isLoggedIn, upload.array('image'), async(req, res, next) => {
   console.log("images: ", req.files);
-  res.json(req.files.map((v) => v.filename));
+  res.json(req.files.map((v) => v.location));
 });
 
 router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
