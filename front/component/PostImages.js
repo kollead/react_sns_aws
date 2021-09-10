@@ -23,7 +23,7 @@ function PostImages({images}) {
         <img
           role="presentation"
           style={{display: 'inline-block', width: '50%'}}
-          src={`${backUrl}/${images[0].src}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
@@ -37,14 +37,14 @@ function PostImages({images}) {
         <img
           role="presentation"
           style={{display: 'inline-block', width: '50%'}}
-          src={`${backUrl}/${images[0].src}`}
+          src={`${images[0].src}`}
           alt={images[0].src}
           onClick={onZoom}
         />
         <img
           role="presentation"
           style={{display: 'inline-block', width: '50%'}}
-          src={`${backUrl}/${images[1].src}`}
+          src={`${images[1].src}`}
           alt={images[1].src}
           onClick={onZoom}
         />
@@ -57,7 +57,7 @@ function PostImages({images}) {
       <img
         role="presentation"
         width="50%"
-        src={`${backUrl}/${images[0].src}`}
+        src={`${images[0].src}`}
         alt={images[0].src}
         onClick={onZoom}
       />
