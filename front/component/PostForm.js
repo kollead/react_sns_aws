@@ -91,7 +91,7 @@ function PostForm() {
         {imagePaths && imagePaths.map((v, i) => (
           <div key={v} style={{display: 'inline-block'}} onClick={imageOnClick(i)} onKeyDown={imageOnClick(i)} role="presentation">
             <img
-              src={`${v}`}
+              src={`${v.replace(/\/thumb\//, '/original/')}`}
               style={{width: '200px'}}
               alt={v}
             />
