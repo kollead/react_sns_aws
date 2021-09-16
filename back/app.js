@@ -27,7 +27,7 @@ db.sequelize.sync()
 
 passportConfig();
 
-app.set('trust-proxy', 1);
+app.set('trust-proxy');
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
   app.use(hpp());
@@ -43,6 +43,7 @@ app.use(cors({
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   saveUninitialized: false,
   resave: false,
@@ -54,7 +55,6 @@ app.use(session({
     domain: process.env.NODE_ENV === 'production' && '.kollid.me'
   },
 }));
-app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 
