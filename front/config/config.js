@@ -1,1 +1,1 @@
-exports.backUrl = 'http://api.kollid.me';
+exports.backUrl = 'https://api.kollid.me';
