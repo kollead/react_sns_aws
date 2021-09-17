@@ -64,7 +64,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>Profile | NodeBird</title>
+        <title>Profile | react_sns</title>
       </Head>
       <AppLayout>
         <NickNameEditForm />

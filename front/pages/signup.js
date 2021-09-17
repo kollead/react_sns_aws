@@ -75,7 +75,7 @@ const Signup = () => {
   return (
     <AppLayout>
       <Head>
-        <title>Sign Up | NodeBird</title>
+        <title>Sign Up | react_sns</title>
       </Head>
       <Form onFinish={onSignUp}>
         <div>
