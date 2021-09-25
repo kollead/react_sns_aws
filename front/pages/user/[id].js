@@ -52,11 +52,10 @@ const User = () => {
         <meta name="description" content={`${userInfo.nickname}님의 게시글`} />
         <meta name="og:title" content={`${userInfo.nickname}님의 게시글`} />
         <meta name="og:description" content={`${userInfo.nickname}님의 게시글`} />
-        <meta name="og:image" content="http://nodebird.com/favicon.ico" />
-        <meta name="og:url" content={`https://nodebird.com/pot.${id}`} />
+        <meta name="og:url" content={`https://kollid.me/pot.${id}`} />
       </Head>
       )}
-      {userInfo && userInfo.id !== user?.id
+      {userInfo && (userInfo.id !== user?.id)
         ? (
           <Card
             style={{marginBottom: 20}}
